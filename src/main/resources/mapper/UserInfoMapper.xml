@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.game.team2.mapper.UserInfoMapper">
 	<select id="selectUserInfos" resultType="com.game.team2.vo.UserInfoVO">
-		SELECT UI_NUM, UI_NAME, UI_ID, UI_PWD 
+		SELECT UI_NUM, UI_NAME, UI_ID, UI_PWD,UI_NAME,UI_MOBILE,UI_EMAIL,UI_BIRTH
 		FROM USER_INFO
 		<where>
 			<if test='uiName != null and uiName != ""'>
@@ -17,25 +17,28 @@
 		</where>
 	</select>
 	<select id="selectUserInfo" resultType="com.game.team2.vo.UserInfoVO">
-		SELECT UI_NUM, UI_NAME, UI_ID, UI_PWD 
+		SELECT UI_NUM, UI_NAME, UI_ID, UI_PWD,UI_MOBILE,UI_EMAIL,UI_BIRTH
 		FROM USER_INFO
 		WHERE UI_NUM = #{uiNum}
 	</select>
 	<select id="selectUserInfoByIdAndPwd" resultType="com.game.team2.vo.UserInfoVO">
-		SELECT UI_NUM, UI_NAME, UI_ID, UI_PWD 
+		SELECT UI_NUM, UI_NAME, UI_ID, UI_PWD,UI_MOBILE,UI_EMAIL,UI_BIRTH 
 		FROM USER_INFO
 		WHERE UI_ID = #{uiId}
 		AND UI_PWD = #{uiPwd}
 	</select>
 	<insert id="insertUserInfo">
-		INSERT INTO USER_INFO(UI_NAME, UI_ID, UI_PWD)
-		VALUES(#{uiName},#{uiId},#{uiPwd})
+		INSERT INTO USER_INFO(UI_NAME, UI_ID, UI_PWD,UI_MOBILE,UI_EMAIL,UI_BIRTH)
+		VALUES(#{uiName},#{uiId},#{uiPwd},#{uiMobile},#{uiEmail},#{uiBirth})
 	</insert>
 	<update id="updateUserInfo">
 		UPDATE USER_INFO
-		SET UI_NAME=#{uiName},
-		UI_PWD=#{uiPwd}
-		WHERE UI_NUM=#{uiNum}
+		SET UI_NAME = '#{uiName}',
+		UI_ID = '#{uiId}',
+		UI_PWD = '#{uiPwd}',
+		UI_NAME = '#{uiName}',
+		UI_MOBILE = '#{uiMobile}',
+		UI_EMAIL = '#{uiEmail}'
 	</update>
 	<delete id="deleteUserInfo">
 		DELETE FROM USER_INFO WHERE UI_NUM=#{uiNum}
