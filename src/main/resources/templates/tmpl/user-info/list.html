@@ -16,6 +16,9 @@
             <th>번호</th>
             <th>이름</th>
             <th>아이디</th>
+            <th>전화번호</th>
+            <th>이메일</th>
+            <th>생일</th>
         </tr>
         <tbody id="tBody">
         </tbody>
@@ -30,6 +33,9 @@
                 html += `<td>${user.uiNum}</td>`;
                 html += `<td>${user.uiName}</td>`;
                 html += `<td>${user.uiId}</td>`;
+                html += `<td>${user.uiMobile}</td>`;
+                html += `<td>${user.uiEmail}</td>`;
+                html += `<td>${user.uiBirth}</td>`;
                 html += '</tr>';
             }
             document.querySelector('#tBody').innerHTML = html;

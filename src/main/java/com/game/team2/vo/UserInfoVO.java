@@ -8,4 +8,10 @@ public class UserInfoVO {
     private String uiName;
     private String uiId;
     private String uiPwd;
+    private String uiMobile;
+    private String uiEmail;
+    private String uiBirth;
+    private String credat;
+    private String lmodat;
+    private String active;
 }
