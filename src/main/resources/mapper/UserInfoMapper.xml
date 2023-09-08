@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.game.team1.mapper.UserInfoMapper">
-	<select id="selectUserInfos" resultType="com.game.team1.vo.UserInfoVO">
+<mapper namespace="com.game.team2.mapper.UserInfoMapper">
+	<select id="selectUserInfos" resultType="com.game.team2.vo.UserInfoVO">
 		SELECT UI_NUM, UI_NAME, UI_ID, UI_PWD 
 		FROM USER_INFO
 		<where>
@@ -16,12 +16,12 @@
 			</if>
 		</where>
 	</select>
-	<select id="selectUserInfo" resultType="com.game.team1.vo.UserInfoVO">
+	<select id="selectUserInfo" resultType="com.game.team2.vo.UserInfoVO">
 		SELECT UI_NUM, UI_NAME, UI_ID, UI_PWD 
 		FROM USER_INFO
 		WHERE UI_NUM = #{uiNum}
 	</select>
-	<select id="selectUserInfoByIdAndPwd" resultType="com.game.team1.vo.UserInfoVO">
+	<select id="selectUserInfoByIdAndPwd" resultType="com.game.team2.vo.UserInfoVO">
 		SELECT UI_NUM, UI_NAME, UI_ID, UI_PWD 
 		FROM USER_INFO
 		WHERE UI_ID = #{uiId}
