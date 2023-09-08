@@ -42,9 +42,10 @@ body {
     white-space: nowrap;
     position: absolute;
     left: 100%;
-    background-image: url("../img/cloud.png"); 
+    background-image: url("../img/dragon.gif"); 
     background-size: 100% 100%;
     background-repeat: no-repeat;
+    
     padding: 20px;
 }
 
