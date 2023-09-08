@@ -1,10 +1,10 @@
-package com.game.team1;
+package com.game.team2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Team1ApplicationTests {
+class Team2ApplicationTests {
 
 	@Test
 	void contextLoads() {
