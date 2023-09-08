@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>타자 게임</title>
+    <link rel="stylesheet" href="./css/style.css"> <!-- 경로 수정 -->
+</head>
+<body>
+    <div class="game-container">
+        <h1>디펜스 게임</h1>
+        <div id="info">
+            <div id="tries">남은 횟수: 5</div>
+            <div id="wordCount">남은 단어: 0</div>
+            <div id="timer">시간: 0</div>
+        </div>
+        <input type="text" id="wordInput" placeholder="단어를 입력하세요" disabled>
+        <div id="message"></div>
+        <button id="restartButton" style="display: none;">다시하기</button>
+    </div>
+    <div class="word-container" id="wordContainer">
+        <button id="startButton"><img src="./img/start.png"> <!-- 경로 수정 --></button>
+    </div>
+    <img id="castle" src="./img/castle.png" alt="Castle"> <!-- 경로 수정 -->
+    
+    <script src="./js/game.js"> </script> <!-- 경로 수정 -->
+</body>
+</html>
