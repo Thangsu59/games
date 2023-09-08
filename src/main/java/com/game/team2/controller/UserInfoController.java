@@ -1,4 +1,4 @@
-package com.game.team1.controller;
+package com.game.team2.controller;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.game.team1.service.UserInfoService;
-import com.game.team1.vo.MsgVO;
-import com.game.team1.vo.UserInfoVO;
+import com.game.team2.service.UserInfoService;
+import com.game.team2.vo.MsgVO;
+import com.game.team2.vo.UserInfoVO;
 
 import lombok.extern.slf4j.Slf4j;
 

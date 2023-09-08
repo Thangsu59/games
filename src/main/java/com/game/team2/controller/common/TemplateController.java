@@ -1,4 +1,4 @@
-package com.game.team1.controller.common;
+package com.game.team2.controller.common;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

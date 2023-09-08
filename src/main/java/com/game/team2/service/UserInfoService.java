@@ -1,12 +1,12 @@
-package com.game.team1.service;
+package com.game.team2.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.game.team1.mapper.UserInfoMapper;
-import com.game.team1.vo.UserInfoVO;
+import com.game.team2.mapper.UserInfoMapper;
+import com.game.team2.vo.UserInfoVO;
 
 @Service
 public class UserInfoService {

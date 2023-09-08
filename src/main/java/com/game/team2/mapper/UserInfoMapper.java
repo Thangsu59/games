@@ -1,10 +1,10 @@
-package com.game.team1.mapper;
+package com.game.team2.mapper;
 
 import java.util.List;
 
 
 
-import com.game.team1.vo.UserInfoVO;
+import com.game.team2.vo.UserInfoVO;
 
 
 public interface UserInfoMapper {

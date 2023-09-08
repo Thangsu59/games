@@ -1,4 +1,4 @@
-package com.game.team1.vo;
+package com.game.team2.vo;
 
 import lombok.Data;
 
