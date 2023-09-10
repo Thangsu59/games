@@ -21,6 +21,9 @@
     <div class="word-container" id="wordContainer">
         <button id="startButton"><img th:src="@{/img/start.png}"> <!-- 경로 수정 --></button>
     </div>
+    <audio id="backgroundMusic" th:src="@{/bgm/Game bgm.mp3}" preload="auto" loop hidden></audio>
+    <audio id="cannonSound" th:src="@{/Esound/Cannon.mp3}"></audio>
+    <button id="musicToggleButton">음악 ON/OFF</button>
     <img id="castle" th:src="@{/img/castle.png}" alt="Castle"> <!-- 경로 수정 -->
     
     <script th:src="@{/js/game.js}"> </script> <!-- 경로 수정 -->
