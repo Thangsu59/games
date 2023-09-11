@@ -31,7 +31,7 @@
             for(const user of users){
                 html += '<tr>';
                 html += `<td>${user.uiNum}</td>`;
-                html += `<td>${user.uiName}</td>`;
+                html += `<td><a href="/tmpl/user-info/one.html?uiNum=${user.uiNum}">${user.uiName}</a></td>`;
                 html += `<td>${user.uiId}</td>`;
                 html += `<td>${user.uiMobile}</td>`;
                 html += `<td>${user.uiEmail}</td>`;
