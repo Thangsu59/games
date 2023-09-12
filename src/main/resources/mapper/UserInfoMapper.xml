@@ -33,12 +33,12 @@
 	</insert>
 	<update id="updateUserInfo">
 		UPDATE USER_INFO
-		SET UI_NAME = '#{uiName}',
-		UI_ID = '#{uiId}',
-		UI_PWD = '#{uiPwd}',
-		UI_NAME = '#{uiName}',
-		UI_MOBILE = '#{uiMobile}',
-		UI_EMAIL = '#{uiEmail}'
+		SET UI_NAME = #{uiName},
+		UI_ID = #{uiId},
+		UI_PWD = #{uiPwd},
+		UI_NAME = #{uiName},
+		UI_MOBILE = #{uiMobile},
+		UI_EMAIL = #{uiEmail}
 	</update>
 	<delete id="deleteUserInfo">
 		DELETE FROM USER_INFO WHERE UI_NUM=#{uiNum}
