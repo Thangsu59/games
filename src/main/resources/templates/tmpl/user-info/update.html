@@ -1,4 +1,3 @@
-<!-- update.html는 현재 작동하지 않습니다 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +19,7 @@
     </form>
 
     <script>
-        window.addEventListener('load', async function () {
+        async function getUserInfo() {
             const params = new URLSearchParams(window.location.search);
             const uiNum = params.get('uiNum');
             if (uiNum) {
@@ -32,9 +31,18 @@
                 document.getElementById('uiPwd').value = userInfo.uiPwd;
                 document.getElementById('uiMobile').value = userInfo.uiMobile;
                 document.getElementById('uiEmail').value = userInfo.uiEmail;
-                document.getElementById('uiBirth').value = userInfo.uiBirth;
+
+                const formattedDate = formatDate(userInfo.uiBirth);
+                document.getElementById('uiBirth').value = formattedDate;
             }
-        });
+        }
+
+        function formatDate(inputDate) {
+            const year = inputDate.substring(0, 4);
+            const month = inputDate.substring(4, 6);
+            const day = inputDate.substring(6, 8);
+            return `${year}-${month}-${day}`;
+        }
 
         function saveUserInfo() {
             const uiNum = document.getElementById('uiNum').value;
@@ -43,7 +51,9 @@
             const uiPwd = document.getElementById('uiPwd').value;
             const uiMobile = document.getElementById('uiMobile').value;
             const uiEmail = document.getElementById('uiEmail').value;
-            const uiBirth = document.getElementById('uiBirth').value;
+            let uiBirth = document.getElementById('uiBirth').value;
+
+            uiBirth = uiBirth.replace(/-/g, '');
 
             const user = {
                 uiNum,
@@ -71,6 +81,8 @@
             })
             .catch(error => console.error('사용자 정보 수정 오류:', error));
         }
+
+        window.addEventListener('load', getUserInfo);
     </script>
 </body>
 </html>
