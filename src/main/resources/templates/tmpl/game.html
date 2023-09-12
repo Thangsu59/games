@@ -22,7 +22,12 @@
         <button id="startButton"><img th:src="@{/img/start.png}"> <!-- 경로 수정 --></button>
     </div>
     <audio id="backgroundMusic" th:src="@{/bgm/Game bgm.mp3}" preload="auto" loop hidden></audio>
-    <audio id="cannonSound" th:src="@{/Esound/Cannon.mp3}"></audio>
+    <audio id="arrowSound" th:src="@{/Esound/arrow.wav}"></audio>
+    <audio id="flyingSound" th:src="@{/Esound/flyingArrow.mp3}"></audio>
+    <audio id="hitSound" th:src="@{/Esound/hitSound.wav}"></audio>
+    <audio id="failSound" th:src="@{/Esound/failSound.wav}"></audio>
+    <audio id="destSound" th:src="@{/Esound/CAST_02.wav}"></audio>
+    <audio id="clearSound" th:src="@{/Esound/clearSound.wav}"></audio>
     <button id="musicToggleButton">음악 ON/OFF</button>
     <img id="castle" th:src="@{/img/castle.png}" alt="Castle"> <!-- 경로 수정 -->
     

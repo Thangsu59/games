@@ -41,12 +41,24 @@ body {
     font-size: 48px;
     white-space: nowrap;
     position: absolute;
+    padding:20px;
+}
+
+.dragon {
+    width: 350px;
+    height: 220px;
+    position: absolute;
     left: 100%;
     background-image: url("../img/dragon.gif"); 
-    background-size: 100% 100%;
+    background-size: 100% 70%;
+    background-position:center bottom;
     background-repeat: no-repeat;
-    
-    padding: 20px;
+    display:flex;
+    justify-content: center;
+}
+
+.arrow{
+    background-image: url("../img/arrow.png");
 }
 
 input[type="text"] {

@@ -20,8 +20,13 @@ const triesDisplay = document.getElementById("tries");
 const wordCountDisplay = document.getElementById("wordCount");
 const restartButton = document.getElementById("restartButton");
 const timerDisplay = document.getElementById("timer");
+
 const backgroundMusic = document.getElementById("backgroundMusic");
-const cannonSound = document.getElementById("cannonSound");
+const arrowSound = document.getElementById("arrowSound");
+const flyingSound = document.getElementById("flyingSound");
+const hitSound = document.getElementById("hitSound");
+const failSound = document.getElementById("failSound");
+const destSound = document.getElementById("destSound");
 
 
 // 게임 상태와 타이머 등을 관리하는 변수들
@@ -35,6 +40,10 @@ let animationFrameId;
 
 // 음악 재생 여부를 나타내는 변수
 let isMusicPlaying = true;
+backgroundMusic.volume = 0.5;
+arrowSound.volume = 0.7;
+flyingSound.volume = 0.6;
+hitSound.volume = 0.2;
 
 // 음악 토글 버튼 클릭 이벤트 처리
 musicToggleButton.addEventListener("click", function () {
@@ -80,14 +89,17 @@ function animateWord() {
     // 아직 모든 단어가 표시되지 않은 경우
     if (currentCategoryIndex < allWords.length) {
         // 새로운 단어 엘리먼트 생성
+        const dragon = document.createElement("div");
         const word = document.createElement("div");
+        dragon.className = "dragon";
         word.textContent = allWords[currentCategoryIndex].word;
         word.className = "word";
-        wordContainer.appendChild(word);
+        dragon.appendChild(word);
+        wordContainer.appendChild(dragon);
 
         // 애니메이션에 사용되는 변수들 초기화
         const containerWidth = wordContainer.offsetWidth; // 컨테이너의 너비
-        const wordWidth = word.offsetWidth; // 단어 엘리먼트의 너비
+        const wordWidth = dragon.offsetWidth; // 단어 엘리먼트의 너비
         const startPos = containerWidth; // 시작 위치
 
         // 문자 길이에 따른 애니메이션 속도 설정
@@ -114,13 +126,14 @@ function animateWord() {
             // 현재 위치 계산
             position = startPos - (elapsed / duration) * (containerWidth + wordWidth);
             // 단어 위치 업데이트
-            word.style.left = position + "px";
+            dragon.style.left = position + "px";
 
             // 단어가 화면 왼쪽을 벗어났는지 확인
             if (position + wordWidth < -10) {
                 cancelAnimationFrame(animationFrameId); // 애니메이션 중지
-                wordContainer.removeChild(word); // 단어 엘리먼트 제거
+                wordContainer.removeChild(dragon); // 단어 엘리먼트 제거
                 currentCategoryIndex++; // 다음 단어로 넘어감
+                destSound.play(); // 실패 효과음 재생
 
                 triesLeft--; // 남은 시도 횟수 감소
                 triesDisplay.textContent = `남은 횟수: ${triesLeft}`; // 남은 시도 횟수 업데이트
@@ -174,6 +187,7 @@ function displayWord() {
         stopTimer(); // 타이머 정지
         restartButton.style.display = "block"; // 재시작 버튼 표시
         wordContainer.innerHTML = ""; // 단어 컨테이너 내용 비우기
+        clearSound.play(); // 클리어 효과음 재생
     }
 }
 
@@ -188,18 +202,21 @@ function checkWord() {
     // 사용자 입력이 정답과 일치하는 경우
     if (userInput === word) {
         message.textContent = "맞음!"; // 정답 메시지 표시
-        const currentWord = document.querySelector(".word");
+        const currentWord = document.querySelector(".dragon");
         cancelAnimationFrame(animationFrameId); // 애니메이션 중지
         wordContainer.removeChild(currentWord); // 현재 단어 엘리먼트 제거
         currentCategoryIndex++; // 다음 단어로 넘어감
         displayWord(); // 다음 단어 표시
         wordCountDisplay.textContent = `남은 단어: ${allWords.length - currentCategoryIndex}`; // 남은 단어 개수 업데이트
-        cannonSound.play();
+        arrowSound.play();
+        flyingSound.play();
+        setTimeout(() => hitSound.play(), 170);
     } else {
         message.textContent = "틀림!"; // 오답 메시지 표시
         wordInput.value = ""; // 입력 필드 초기화
         triesLeft--; // 남은 시도 횟수 감소
         triesDisplay.textContent = `남은 횟수: ${triesLeft}`; // 남은 시도 횟수 업데이트
+        failSound.play(); // 실패 효과음 재생
 
         // 시도 횟수가 0인 경우
         if (triesLeft === 0) {
@@ -212,7 +229,7 @@ function checkWord() {
 
         // 시도 횟수가 3보다 작아지면 배경 이미지 변경
         if (triesLeft < 3) {
-            document.body.style.backgroundImage = 'url("@{img/background1.png}")';
+            document.body.style.backgroundImage = "url('/img/background1.png')";
         }
     }
 }
@@ -277,7 +294,7 @@ restartButton.addEventListener("click", function () {
     wordInput.value = "";
 
     // 배경 이미지를 원래 이미지로 변경
-    document.body.style.backgroundImage = 'url("@{img/background.png}")';
+    document.body.style.backgroundImage = "url('/img/background.png')";
 
     // 게임 시작
     gameStarted = false; // 게임 상태를 끝낸 상태로 만든 후,
