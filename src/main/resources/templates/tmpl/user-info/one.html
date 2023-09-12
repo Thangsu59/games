@@ -1,60 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Info Update</title>
+    <title>User Info</title>
 </head>
+
 <body>
-    <h3>사용자 정보 수정</h3>
-    <form>
-        <label for="uiName">이름 :</label>
-        <input type="text" id="uiName" placeholder="이름"><br>
-        <label for="uiId">아이디 :</label>
-        <input type="text" id="uiId" placeholder="아이디"><br>
-        <label for="uiPwd">비밀번호 :</label>
-        <input type="password" id="uiPwd" placeholder="새로운 비밀번호"><br>
-        <label for="uiMobile">휴대전화 :</label>
-        <input type="text" id="uiMobile" placeholder="전화번호"><br>
-        <label for="uiEmail">이메일 :</label>
-        <input type="text" id="uiEmail" placeholder="이메일"><br>
-        <button type="button" onclick="updateUserInfo()">수정</button>
-    </form>
+    <h3>사용자 정보</h3>
+    <table border="1">
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>아이디</th>
+            <th>전화번호</th>
+            <th>이메일</th>
+            <th>생일</th>
+        </tr>
+        <tbody>
+            <tr>
+                <td id="uiNum"></td>
+                <td id="uiName"></td>
+                <td id="uiId"></td>
+                <td id="uiMobile"></td>
+                <td id="uiEmail"></td>
+                <td id="uiBirth"></td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="updateButton">수정</button>
+
+    <button id="deleteButton">삭제</button>
 
     <script>
-        let uiNum;
-        let userInfo;
-
         window.addEventListener('load', async function () {
-            const params = new URLSearchParams(window.location.search);
-            uiNum = params.get('uiNum');
+            const urlParams = new URLSearchParams(window.location.search);
+            const uiNum = urlParams.get('uiNum');
 
-            if (uiNum) {
-                const res = await fetch(`/user-infos/${uiNum}`);
-                userInfo = await res.json();
-                populateForm(userInfo);
-            }
+            const res = await fetch(`/user-infos/${uiNum}`);
+            const userInfo = await res.json();
+
+            document.querySelector('#uiNum').textContent = userInfo.uiNum;
+            document.querySelector('#uiName').textContent = userInfo.uiName;
+            document.querySelector('#uiId').textContent = userInfo.uiId;
+            document.querySelector('#uiMobile').textContent = userInfo.uiMobile;
+            document.querySelector('#uiEmail').textContent = userInfo.uiEmail;
+            document.querySelector('#uiBirth').textContent = userInfo.uiBirth;
+
+            document.querySelector('#updateButton').addEventListener('click', function () {
+                window.location.href = `/tmpl/user-info/update?uiNum=${uiNum}`;
+            });
+
+            document.querySelector('#deleteButton').addEventListener('click', async function () {
+                if (confirm('정말로 삭제하시겠습니까?')) {
+                    const deleteRes = await fetch(`/deleteUserInfo/${uiNum}`, {
+                        method: 'POST'
+                    });
+
+                    if (deleteRes.status === 200) {
+                        alert('삭제되었습니다.');
+                        window.location.href = '/tmpl/user-info/list';
+                    } else {
+                        alert('삭제에 실패했습니다.');
+                    }
+                }
+            });
+
         });
-
-        function populateForm(userInfo) {
-            if (userInfo) {
-                document.getElementById('uiName').value = userInfo.uiName;
-                document.getElementById('uiId').value = userInfo.uiId;
-                document.getElementById('uiMobile').value = userInfo.uiMobile;
-                document.getElementById('uiEmail').value = userInfo.uiEmail;
-            }
-        }
-
-        function updateUserInfo() {
-            const updatedInfo = {
-                uiName: document.getElementById('uiName').value,
-                uiId: document.getElementById('uiId').value,
-                uiPwd: document.getElementById('uiPwd').value,
-                uiMobile: document.getElementById('uiMobile').value,
-                uiEmail: document.getElementById('uiEmail').value,
-            };
-
-        }
     </script>
 </body>
+
 </html>
