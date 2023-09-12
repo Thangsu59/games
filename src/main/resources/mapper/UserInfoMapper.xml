@@ -38,7 +38,9 @@
 		UI_PWD = #{uiPwd},
 		UI_NAME = #{uiName},
 		UI_MOBILE = #{uiMobile},
-		UI_EMAIL = #{uiEmail}
+		UI_EMAIL = #{uiEmail},
+		UI_BIRTH = #{uiBirth}
+		WHERE UI_NUM = #{uiNum}
 	</update>
 	<delete id="deleteUserInfo">
 		DELETE FROM USER_INFO WHERE UI_NUM=#{uiNum}
