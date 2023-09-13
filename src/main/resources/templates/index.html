@@ -13,7 +13,18 @@
     </div>
     <div th:if="${session.user} != null">
         <span th:text="${session.user.uiName}"></span>님 안녕하세요.<br>
-        <ul></ul>
     </div>
+    <div id="game-list"></div>
+    <script>
+        window.addEventListener('load',async function(){
+            const res = await fetch('/game-infos');
+            const games = await res.json();
+            let html = '';
+            for(const game of games) {
+                html += `<a href='/tmpl/game'>${game.giName}</a>`;
+            }
+            document.querySelector('#game-list').innerHTML = html;
+        })
+    </script>
 </body>
 </html>

@@ -13,6 +13,7 @@
             <div id="tries">남은 횟수: 5</div>
             <div id="wordCount">남은 단어: 0</div>
             <div id="timer">시간: 0</div>
+            <div id="score">현재 점수: 0</div>
         </div>
         <input type="text" id="wordInput" placeholder="단어를 입력하세요" disabled>
         <div id="message"></div>
@@ -31,6 +32,10 @@
     <button id="musicToggleButton">음악 ON/OFF</button>
     <img id="castle" th:src="@{/img/castle.png}" alt="Castle"> <!-- 경로 수정 -->
     
+    <button>저장하기</button>
     <script th:src="@{/js/game.js}"> </script> <!-- 경로 수정 -->
+    <script>
+        async
+    </script>
 </body>
 </html>
