@@ -257,7 +257,7 @@ function checkWord() {
 
         // 시도 횟수가 3보다 작아지면 배경 이미지 변경
         if (triesLeft < 3) {
-            document.body.style.backgroundImage = "url('/img/background1.png')";
+            document.body.style.backgroundImage = "url('/img/background2.png')";
         }
     }
 
