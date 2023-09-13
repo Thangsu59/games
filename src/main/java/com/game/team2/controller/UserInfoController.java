@@ -81,7 +81,7 @@ public class UserInfoController {
         msg.setMsg("아이디나 비밀번호를 확인하세요");
         if (loginUser != null) {
             session.setAttribute("user", loginUser);
-            msg.setMsg("로그인이 성공하였습니다.");
+            msg.setMsg("로그인에 성공하였습니다.");
             msg.setUrl("/");
             msg.setSuccess(true);
         }
