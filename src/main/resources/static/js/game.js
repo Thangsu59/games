@@ -27,6 +27,7 @@ const flyingSound = document.getElementById("flyingSound");
 const hitSound = document.getElementById("hitSound");
 const failSound = document.getElementById("failSound");
 const destSound = document.getElementById("destSound");
+const scoreDisplay = document.getElementById("score");
 
 
 // 게임 상태와 타이머 등을 관리하는 변수들
@@ -37,6 +38,9 @@ let startTime = 0;
 let timerInterval;
 let gameStarted = false;
 let animationFrameId;
+// 게임에 사용될 점수 변수 초기화
+let score = 0;
+let gameEndTime = 0; // 게임 종료 시간을 기록할 변수
 
 // 음악 재생 여부를 나타내는 변수
 let isMusicPlaying = true;
@@ -173,23 +177,41 @@ function animateWord() {
 function displayWord() {
     // 아직 모든 단어가 표시되지 않은 경우
     if (currentCategoryIndex < allWords.length) {
-        const { category } = allWords[currentCategoryIndex];
         // 입력 필드 활성화 및 초기화
         wordInput.disabled = false;
         wordInput.value = "";
         wordInput.focus();
+
         // 단어 이동 애니메이션 시작
         animateWord();
     } else {
         // 모든 단어가 표시된 경우
-        message.textContent = "게임 종료!"; // 메시지 업데이트
+        setGameEndTime(); // 게임 종료 시간 설정
+
+        // 게임 종료 시간에 따라 점수 계산
+        const elapsedTime = Math.floor((gameEndTime - startTime) / 1000);
+        let timeBasedScore = 0;
+        if (elapsedTime >= 0 && elapsedTime <= 100) {
+            timeBasedScore = 300;
+        } else if (elapsedTime > 100 && elapsedTime <= 200) {
+            timeBasedScore = 200;
+        } else {
+            timeBasedScore = 100;
+        }
+
+        // 최종 점수 계산
+        const finalScore = score + timeBasedScore;
+
+        // 점수 표시
+        message.textContent = `게임 종료! 최종 점수: ${finalScore}`;
+        scoreDisplay.textContent = `현재 점수: ${finalScore}`;
         wordInput.disabled = true; // 입력 필드 비활성화
-        stopTimer(); // 타이머 정지
         restartButton.style.display = "block"; // 재시작 버튼 표시
         wordContainer.innerHTML = ""; // 단어 컨테이너 내용 비우기
         clearSound.play(); // 클리어 효과음 재생
     }
 }
+
 
 // 사용자 입력 단어 확인 함수
 function checkWord() {
@@ -199,9 +221,15 @@ function checkWord() {
     // 현재 단어 카테고리의 정답 단어와 카테고리 가져오기
     const { category, word } = allWords[currentCategoryIndex];
 
+    const wordValue = getCategoryValue(category);
+
+
     // 사용자 입력이 정답과 일치하는 경우
-    if (userInput === word) {
+    if (userInput === allWords[currentCategoryIndex].word) {
         message.textContent = "맞음!"; // 정답 메시지 표시
+        score += wordValue;
+        // 점수 업데이트
+        updateScore();
         const currentWord = document.querySelector(".dragon");
         cancelAnimationFrame(animationFrameId); // 애니메이션 중지
         wordContainer.removeChild(currentWord); // 현재 단어 엘리먼트 제거
@@ -232,8 +260,28 @@ function checkWord() {
             document.body.style.backgroundImage = "url('/img/background1.png')";
         }
     }
+
+    
 }
 
+// 카테고리에 따른 단어 점수를 반환하는 함수
+function getCategoryValue(category) {
+    switch (category) {
+        case "쉬움":
+            return 2;
+        case "보통":
+            return 4;
+        case "어려움":
+            return 6;
+        default:
+            return 0; // 다른 카테고리가 들어온 경우 0점으로 처리
+    }
+}
+
+// 점수를 업데이트하는 함수
+function updateScore() {
+    scoreDisplay.textContent = `현재 점수: ${score}`;
+}
 
 // 게임 시작 함수
 function startGame() {
@@ -276,6 +324,48 @@ wordInput.addEventListener("keyup", function (event) {
     }
 });
 
+// 게임 종료 시간을 설정하는 함수
+function setGameEndTime() {
+    const currentTime = Date.now();
+    gameEndTime = currentTime;
+}
+
+
+// 게임 종료 시에 점수를 0으로 초기화하는 함수
+function resetScore() {
+    score = 0;
+    updateScore(); // 점수 업데이트
+}
+
+// 게임 종료 시에 호출할 함수
+function endGame() {
+    setGameEndTime(); // 게임 종료 시간 설정
+
+    // 게임 종료 시간에 따라 점수 계산
+    const elapsedTime = Math.floor((gameEndTime - startTime) / 1000);
+    let timeBasedScore = 0;
+    if (elapsedTime >= 0 && elapsedTime <= 100) {
+        timeBasedScore = 300;
+    } else if (elapsedTime > 100 && elapsedTime <= 200) {
+        timeBasedScore = 200;
+    } else {
+        timeBasedScore = 100;
+    }
+
+    // 최종 점수 계산
+    const finalScore = score + timeBasedScore;
+
+    // 점수 표시
+    message.textContent = `게임 종료! 최종 점수: ${finalScore}`;
+    scoreDisplay.textContent = `현재 점수: ${finalScore}`;
+    wordInput.disabled = true; // 입력 필드 비활성화
+    restartButton.style.display = "block"; // 재시작 버튼 표시
+    wordContainer.innerHTML = ""; // 단어 컨테이너 내용 비우기
+    clearSound.play(); // 클리어 효과음 재생
+
+    // 점수 초기화
+    resetScore();
+}
 
 // 다시 시작 버튼 클릭 이벤트 처리
 restartButton.addEventListener("click", function () {
@@ -299,7 +389,11 @@ restartButton.addEventListener("click", function () {
     // 게임 시작
     gameStarted = false; // 게임 상태를 끝낸 상태로 만든 후,
     startGame(); // 게임을 다시 시작합니다.
+
+    // 점수 초기화
+    resetScore();
 });
+
 
 // 초기 게임 정보 표시
 wordCountDisplay.textContent = `남은 단어: ${allWords.length}`;
