@@ -17,6 +17,7 @@
         <input type="text" name="uiPwd" id="uiPwd"><br>
         <div class="error-div" th:text="${msg}"></div>
         <button type="button" onclick="login()">로그인</button>
+        <button onclick="location.href='/tmpl/user-info/join.html'">회원가입</button>
     </form>
     <script>
         async function login(){
