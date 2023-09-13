@@ -339,35 +339,38 @@ function resetScore() {
     updateScore(); // 점수 업데이트
 }
 
-// 게임 종료 시에 호출할 함수
+// 게임 종료 시 호출되는 함수 (score 변수는 게임에서 획득한 점수)
 function endGame() {
-    setGameEndTime(); // 게임 종료 시간 설정
+    // 게임 종료 시에 서버로 piPoint 저장 요청
+    const uiNum = `${session.user.uiNum}`;
+    const giNum = 1;
+    const piPoint = score; // 게임에서 얻은 점수
 
-    // 게임 종료 시간에 따라 점수 계산
-    const elapsedTime = Math.floor((gameEndTime - startTime) / 1000);
-    let timeBasedScore = 0;
-    if (elapsedTime >= 0 && elapsedTime <= 100) {
-        timeBasedScore = 300;
-    } else if (elapsedTime > 100 && elapsedTime <= 200) {
-        timeBasedScore = 200;
-    } else {
-        timeBasedScore = 100;
+    // 게임 종료 시 piPoint를 저장하는 함수 호출
+    async function saveScoreToServer(uiNum, giNum, piPoint) {
+        try {
+            const response = await fetch('/point-info/insert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ uiNum, giNum, piPoint }),
+            });
+
+            if (response.status === 200) {
+                console.log('Score saved successfully');
+            } else {
+                console.error('Failed to save score');
+            }
+        } catch (error) {
+            console.error('Error saving score:', error);
+        }
     }
 
-    // 최종 점수 계산
-    const finalScore = score + timeBasedScore;
+    saveScoreToServer(uiNum, giNum, piPoint);
 
-    // 점수 표시
-    message.textContent = `게임 종료! 최종 점수: ${finalScore}`;
-    scoreDisplay.textContent = `현재 점수: ${finalScore}`;
-    wordInput.disabled = true; // 입력 필드 비활성화
-    restartButton.style.display = "block"; // 재시작 버튼 표시
-    wordContainer.innerHTML = ""; // 단어 컨테이너 내용 비우기
-    clearSound.play(); // 클리어 효과음 재생
-
-    // 점수 초기화
-    resetScore();
 }
+
 
 // 다시 시작 버튼 클릭 이벤트 처리
 restartButton.addEventListener("click", function () {
