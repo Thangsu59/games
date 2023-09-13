@@ -63,7 +63,13 @@ body {
 }
 
 .arrow{
+    width:100px;
+    height:100px;
+    position:absolute;
+    left:120px;
+    bottom:150px;
     background-image: url("../img/arrow.png");
+    background-size: 100% 100%;
 }
 
 input[type="text"] {

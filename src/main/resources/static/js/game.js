@@ -152,6 +152,11 @@ function animateWord() {
                     return;
                 }
 
+                // 시도 횟수가 3보다 작아지면 배경 이미지 변경
+                if (triesLeft < 3) {
+                    document.body.style.backgroundImage = "url('/img/background2.png')";
+                }
+
                 // 현재 카테고리의 모든 단어가 표시되지 않은 경우
                 if (currentCategoryIndex < allWords.length) {
                     displayWord(); // 다음 단어 표시
@@ -228,17 +233,30 @@ function checkWord() {
     if (userInput === allWords[currentCategoryIndex].word) {
         message.textContent = "맞음!"; // 정답 메시지 표시
         score += wordValue;
-        // 점수 업데이트
-        updateScore();
-        const currentWord = document.querySelector(".dragon");
-        cancelAnimationFrame(animationFrameId); // 애니메이션 중지
-        wordContainer.removeChild(currentWord); // 현재 단어 엘리먼트 제거
-        currentCategoryIndex++; // 다음 단어로 넘어감
-        displayWord(); // 다음 단어 표시
+        updateScore(); // 점수 업데이트
         wordCountDisplay.textContent = `남은 단어: ${allWords.length - currentCategoryIndex}`; // 남은 단어 개수 업데이트
-        arrowSound.play();
-        flyingSound.play();
-        setTimeout(() => hitSound.play(), 170);
+        const arrow = document.createElement('div');
+        arrow.className = 'arrow';
+        document.body.appendChild(arrow);
+        anime({
+            targets: 'div.arrow',
+            easing: 'easeInOutQuint',
+            translateX: {value:document.querySelector('.dragon').style.left + wordContainer.offsetWidth, duration: 300},
+            translateY: {value:-300, duration: 300},
+            changeBegin: function(anim){
+                arrowSound.play();
+                flyingSound.play();
+            },
+            changeComplete: function(anim){
+                document.body.removeChild(arrow);
+                hitSound.play();
+                const currentWord = document.querySelector(".dragon");
+                wordContainer.removeChild(currentWord); // 현재 단어 엘리먼트 제거
+                cancelAnimationFrame(animationFrameId); // 애니메이션 중지
+                currentCategoryIndex++; // 다음 단어로 넘어감
+                displayWord(); // 다음 단어 표시
+            }
+        })
     } else {
         message.textContent = "틀림!"; // 오답 메시지 표시
         wordInput.value = ""; // 입력 필드 초기화
