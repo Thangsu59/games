@@ -1,8 +1,6 @@
-상 — 오늘 오후 4:56
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd%22%3E
-<mapper namespace="com.game.team2.mapper.PointInfoMapper">
-
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <mapper namespace="com.game.team2.mapper.UserInfoMapper">
     <select id="selectPointInfo" parameterType="int" resultType="com.game.team2.vo.PointInfoVO">
         SELECT PI_POINT
         FROM POINT_INFO
@@ -10,12 +8,10 @@
         AND GI_NUM = #{giNum}
     </select>
 
-
     <insert id="insertPointInfo" parameterType="com.game.team2.vo.PointInfoVO">
         INSERT INTO POINT_INFO(GI_NUM, UI_NUM, PI_POINT)
         VALUES (#{giNum}, #{uiNum}, #{piPoint})
     </insert>
-
 
     <update id="updatePointInfo" parameterType="com.game.team2.vo.PointInfoVO">
         UPDATE POINT_INFO
@@ -24,4 +20,5 @@
         WHERE UI_NUM = #{uiNum}
         AND GI_NUM = #{giNum}
     </update>
+    
 </mapper>
