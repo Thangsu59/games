@@ -253,6 +253,8 @@ function checkWord() {
             wordInput.disabled = true; // 입력 필드 비활성화
             stopTimer(); // 타이머 정지
             restartButton.style.display = "block"; // 재시작 버튼 표시
+
+            castle.src = "/img/castle1.png";
         }
 
         // 시도 횟수가 3보다 작아지면 배경 이미지 변경
@@ -385,6 +387,7 @@ restartButton.addEventListener("click", function () {
 
     // 배경 이미지를 원래 이미지로 변경
     document.body.style.backgroundImage = "url('/img/background.png')";
+    castle.src = "/img/castle.png";
 
     // 게임 시작
     gameStarted = false; // 게임 상태를 끝낸 상태로 만든 후,
