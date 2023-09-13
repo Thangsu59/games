@@ -10,6 +10,9 @@
     <div class="game-container">
         <h1>디펜스 게임</h1>
         <div id="info">
+            <div th:if="${session.user} != null">
+                <span th:text="${session.user.uiName}"></span><br>
+            </div>
             <div id="tries">남은 횟수: 5</div>
             <div id="wordCount">남은 단어: 0</div>
             <div id="timer">시간: 0</div>
