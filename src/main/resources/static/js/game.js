@@ -63,9 +63,9 @@ musicToggleButton.addEventListener("click", function () {
 // 음악 플레이어 상태에 따라 버튼 텍스트 업데이트
 function updateMusicToggleButton() {
     if (isMusicPlaying) {
-        musicToggleButton.textContent = "음악 끄기";
+        musicToggleButton.innerHTML = '<img src="/img/sound.png" alt="Sound ON" width="50" height="50">';
     } else {
-        musicToggleButton.textContent = "음악 켜기";
+        musicToggleButton.innerHTML = '<img src="/img/nosound.png" alt="Sound Off" width="50" height="50">';
     }
 }
 
