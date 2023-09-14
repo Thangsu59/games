@@ -63,9 +63,9 @@ musicToggleButton.addEventListener("click", function () {
 // 음악 플레이어 상태에 따라 버튼 텍스트 업데이트
 function updateMusicToggleButton() {
     if (isMusicPlaying) {
-        musicToggleButton.innerHTML = '<img src="/img/sound.png" alt="Sound ON" width="50" height="50">';
+        musicToggleButton.textContent = "음악 끄기";
     } else {
-        musicToggleButton.innerHTML = '<img src="/img/nosound.png" alt="Sound Off" width="50" height="50">';
+        musicToggleButton.textContent = "음악 켜기";
     }
 }
 
@@ -357,37 +357,49 @@ function resetScore() {
     updateScore(); // 점수 업데이트
 }
 
-// 게임 종료 시 호출되는 함수 (score 변수는 게임에서 획득한 점수)
-function endGame() {
-    // 게임 종료 시에 서버로 piPoint 저장 요청
-    const uiNum = `${session.user.uiNum}`;
+// 저장 버튼 클릭 이벤트 처리
+const saveButton = document.getElementById("saveButton");
+saveButton.addEventListener("click", function () {
+    // 서버 엔드포인트 URL (실제 서버 경로에 맞게 수정)
+    const serverUrl = "/point-infos"; // 서버에 점수를 저장하는 엔드포인트 경로
+
+    // 게임 종료 시의 점수를 finalScore로 설정
+    const finalScore = score;
+
+    // 세션에서 uiNum 가져오기
+    const uiNum = sessionStorage.getItem("uiNum");
+
+    // giNum 고정 값
     const giNum = 1;
-    const piPoint = score; // 게임에서 얻은 점수
 
-    // 게임 종료 시 piPoint를 저장하는 함수 호출
-    async function saveScoreToServer(uiNum, giNum, piPoint) {
-        try {
-            const response = await fetch('/point-info/insert', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ uiNum, giNum, piPoint }),
-            });
+    // 서버에 보낼 데이터 객체 생성
+    const point = {
+        uiNum: uiNum,
+        giNum: giNum,
+        piPoint: finalScore
+    };
 
-            if (response.status === 200) {
-                console.log('Score saved successfully');
-            } else {
-                console.error('Failed to save score');
-            }
-        } catch (error) {
-            console.error('Error saving score:', error);
+    // POST 요청 설정
+    fetch(serverUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(point) // 데이터를 JSON 형식으로 변환하여 전송
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            alert("점수가 저장되었습니다.");
+        } else {
+            alert("점수 저장에 실패했습니다.");
         }
-    }
-
-    saveScoreToServer(uiNum, giNum, piPoint);
-
-}
+    })
+    .catch(error => {
+        console.error("서버와 통신 중 오류 발생:", error);
+        alert("서버와 통신에 문제가 발생했습니다.");
+    });
+});
 
 
 // 다시 시작 버튼 클릭 이벤트 처리
