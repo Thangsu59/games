@@ -1,31 +1,45 @@
 package com.game.team2.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.game.team2.service.PointInfoService;
+import com.game.team2.vo.MsgVO;
 import com.game.team2.vo.PointInfoVO;
-import org.springframework.web.bind.annotation.*;
+import com.game.team2.vo.UserInfoVO;
 
 @RestController
-@RequestMapping("/point-info")
 public class PointInfoController {
 
-    private final PointInfoService pointInfoService;
+    @Autowired
+    private PointInfoService pointInfoService;
 
-    public PointInfoController(PointInfoService pointInfoService) {
-        this.pointInfoService = pointInfoService;
+    @PostMapping("/point-infos")
+    public MsgVO  addPointInfo(@RequestBody PointInfoVO point, MsgVO msg) {
+        msg.setMsg("점수 저장에 실패하였습니다.");
+        if(pointInfoService.addPointInfo(point)==1) {
+            msg.setMsg("점수 저장 성공");
+            msg.setSuccess(true);
+        }
+        return msg;
     }
 
-    @GetMapping("/select/{uiNum}/{giNum}")
-    public PointInfoVO selectPointInfo(@PathVariable int uiNum, @PathVariable int giNum) {
-        return pointInfoService.selectPointInfo(uiNum, giNum);
+    @GetMapping("/point-infos/max")
+    public PointInfoVO getMaxPointInfo(PointInfoVO point, HttpSession session) {
+        UserInfoVO user = (UserInfoVO) session.getAttribute("user");
+        point.setUiNum(user.getUiNum());
+        return pointInfoService.selectMaxPoint(point);
     }
 
-    @PostMapping("/insert")
-    public int insertPointInfo(@RequestBody PointInfoVO pointInfoVO) {
-        return pointInfoService.insertPointInfo(pointInfoVO);
-    }
-
-    @PostMapping("/update")
-    public int updatePointInfo(@RequestBody PointInfoVO pointInfoVO) {
-        return pointInfoService.updatePointInfo(pointInfoVO);
+    @GetMapping("/point-infos/rank")
+    public List<PointInfoVO> getRankInfo(PointInfoVO point) {
+        return pointInfoService.selectPointRank(point);
     }
 }

@@ -1,11 +1,14 @@
 package com.game.team2.mapper;
 
+import java.util.List;
+
 import com.game.team2.vo.PointInfoVO;
 
 public interface PointInfoMapper {
-    PointInfoVO selectPointInfo(int uiNum, int giNum);
+    PointInfoVO selectMaxPoint(PointInfoVO point);
 
-    int insertPointInfo(PointInfoVO point);
+    List<PointInfoVO> selectPointRank(PointInfoVO point);
 
-    int updatePointInfo(PointInfoVO point);
+    int addPointInfo(PointInfoVO point);
+
 }
