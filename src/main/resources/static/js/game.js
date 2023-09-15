@@ -249,15 +249,15 @@ function checkWord() {
         document.body.appendChild(arrow);
         anime({
             targets: 'div.arrow',
-            easing: 'easeOutQuad',
-            translateX: parseInt(getComputedStyle(document.querySelector('.dragon')).left)  //dragon div의 x좌표
+            easing: 'easeInBack',
+            translateX: parseInt(getComputedStyle(document.querySelector('.dragon')).left)  //dragon div의 왼쪽좌표
                       + (parseInt(getComputedStyle(document.querySelector('.dragon')).width)/2), //width를 고려해 중앙좌표 연산
             translateY: - parseInt(getComputedStyle(document.querySelector('.dragon')).top)
                       + (parseInt(getComputedStyle(document.querySelector('.dragon')).height)/2),
-            duration: 300,
+            duration: 400,
             rotate: {
                 value: 2000,
-                duration: 300
+                duration: 400
             },
             changeBegin: function(anim){
                 arrowSound.play();
