@@ -90,12 +90,12 @@ body {
 }
 
 .arrow{
-    width:100px;
-    height:100px;
+    width:70px;
+    height:70px;
     position:fixed;
     left:120px;
     bottom:150px;
-    background-image: url("../img/arrow.png");
+    background-image: url("../img/spike_ball.png");
     background-size: 100% 100%;
 }
 
@@ -169,4 +169,8 @@ input[type="text"] {
     border:none;
     background-color: rgba( 255, 255, 255, 0 );
     
+}
+#saveButton{
+    border:none;
+    background-color: rgba( 255, 255, 255, 0 );
 }

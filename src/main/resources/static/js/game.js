@@ -63,9 +63,11 @@ musicToggleButton.addEventListener("click", function () {
 // 음악 플레이어 상태에 따라 버튼 텍스트 업데이트
 function updateMusicToggleButton() {
     if (isMusicPlaying) {
-        musicToggleButton.textContent = "음악 끄기";
+        // 음악이 재생 중인 경우 이미지를 설정합니다.
+        musicToggleButton.innerHTML = '<img src="/img/sound.png" alt="Sound Off" width="50" height="50">';
     } else {
-        musicToggleButton.textContent = "음악 켜기";
+        // 음악이 꺼져 있는 경우 이미지를 설정합니다.
+        musicToggleButton.innerHTML = '<img src="/img/nosound.png" alt="Sound On" width="50" height="50">';
     }
 }
 
@@ -247,12 +249,16 @@ function checkWord() {
         document.body.appendChild(arrow);
         anime({
             targets: 'div.arrow',
-            easing: 'linear',
+            easing: 'easeOutQuad',
             translateX: parseInt(getComputedStyle(document.querySelector('.dragon')).left)  //dragon div의 x좌표
                       + (parseInt(getComputedStyle(document.querySelector('.dragon')).width)/2), //width를 고려해 중앙좌표 연산
             translateY: - parseInt(getComputedStyle(document.querySelector('.dragon')).top)
                       + (parseInt(getComputedStyle(document.querySelector('.dragon')).height)/2),
-            duration: 200,
+            duration: 300,
+            rotate: {
+                value: 2000,
+                duration: 300
+            },
             changeBegin: function(anim){
                 arrowSound.play();
                 flyingSound.play();
