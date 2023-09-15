@@ -139,6 +139,13 @@ function animateWord() {
                 currentCategoryIndex++; // 다음 단어로 넘어감
                 destSound.play(); // 실패 효과음 재생
 
+                const castle = document.querySelector('#castle');
+                anime({
+                    target: castle,
+                    translateX: 1000,
+                    duration: 1000
+                })
+
                 triesLeft--; // 남은 시도 횟수 감소
                 triesDisplay.textContent = `남은 횟수: ${triesLeft}`; // 남은 시도 횟수 업데이트
                 wordCountDisplay.textContent = `남은 단어: ${allWords.length - currentCategoryIndex}`; // 남은 단어 차감
@@ -240,9 +247,12 @@ function checkWord() {
         document.body.appendChild(arrow);
         anime({
             targets: 'div.arrow',
-            easing: 'easeInOutQuint',
-            translateX: {value:document.querySelector('.dragon').style.left + wordContainer.offsetWidth, duration: 300},
-            translateY: {value:-300, duration: 300},
+            easing: 'linear',
+            translateX: parseInt(getComputedStyle(document.querySelector('.dragon')).left)  //dragon div의 x좌표
+                      + (parseInt(getComputedStyle(document.querySelector('.dragon')).width)/2), //width를 고려해 중앙좌표 연산
+            translateY: - parseInt(getComputedStyle(document.querySelector('.dragon')).top)
+                      + (parseInt(getComputedStyle(document.querySelector('.dragon')).height)/2),
+            duration: 200,
             changeBegin: function(anim){
                 arrowSound.play();
                 flyingSound.play();
