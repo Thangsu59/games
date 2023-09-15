@@ -360,46 +360,64 @@ function resetScore() {
 // 저장 버튼 클릭 이벤트 처리
 const saveButton = document.getElementById("saveButton");
 saveButton.addEventListener("click", function () {
-    // 서버 엔드포인트 URL (실제 서버 경로에 맞게 수정)
+    // 서버 엔드포인트 URL
     const serverUrl = "/point-infos"; // 서버에 점수를 저장하는 엔드포인트 경로
 
     // 게임 종료 시의 점수를 finalScore로 설정
     const finalScore = score;
 
-    // 세션에서 uiNum 가져오기
-    const uiNum = sessionStorage.getItem("uiNum");
+    // 서버에서 uiNum 가져오기
+    fetch("/getUiNum")
+        .then(response => response.json())
+        .then(uiNum => {
+            if (uiNum !== -1) {
+                // 세션에서 가져온 uiNum을 사용할 수 있음
+                console.log("uiNum:", uiNum);
 
-    // giNum 고정 값
-    const giNum = 1;
+                // giNum
+                const giNum = 1;
 
-    // 서버에 보낼 데이터 객체 생성
-    const point = {
-        uiNum: uiNum,
-        giNum: giNum,
-        piPoint: finalScore
-    };
+                // 서버에 보낼 데이터 객체 생성 (JSON 형식)
+                const point = {
+                    uiNum: uiNum,
+                    giNum: giNum,
+                    piPoint: finalScore
+                };
 
-    // POST 요청 설정
-    fetch(serverUrl, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(point) // 데이터를 JSON 형식으로 변환하여 전송
-    })
-    .then(response => response.json())
-    .then(result => {
-        if (result.success) {
-            alert("점수가 저장되었습니다.");
-        } else {
-            alert("점수 저장에 실패했습니다.");
-        }
-    })
-    .catch(error => {
-        console.error("서버와 통신 중 오류 발생:", error);
-        alert("서버와 통신에 문제가 발생했습니다.");
-    });
+                // 출력: 서버로 보내는 데이터를 콘솔에 출력
+                console.log("보내는 데이터:", point);
+
+                // POST 요청 설정
+                fetch(serverUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(point) // 데이터를 JSON 형식으로 변환하여 전송
+                })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert("점수가 저장되었습니다.");
+                    } else {
+                        alert("점수 저장에 실패했습니다.");
+                    }
+                })
+                .catch(error => {
+                    console.error("서버와 통신 중 오류 발생:", error);
+                    alert("서버와 통신에 문제가 발생했습니다.");
+                });
+            } else {
+                console.log("세션에 사용자 정보가 없습니다.");
+            
+            }
+        })
+        .catch(error => {
+            console.error("서버와 통신 중 오류 발생:", error);
+            alert("서버와 통신에 문제가 발생했습니다.");
+        });
 });
+
 
 
 // 다시 시작 버튼 클릭 이벤트 처리

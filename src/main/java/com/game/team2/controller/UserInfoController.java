@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.team2.service.UserInfoService;
@@ -87,4 +88,16 @@ public class UserInfoController {
         }
         return msg;
     }
+
+    @GetMapping("/getUiNum")
+    @ResponseBody
+    public int getUiNum(HttpSession session) {
+        UserInfoVO user = (UserInfoVO) session.getAttribute("user");
+        if (user != null) {
+            return user.getUiNum();
+        } else {
+            return -1; // 세션에 사용자 정보가 없을 경우 -1 또는 다른 값으로 처리
+        }
+    }
+
 }
