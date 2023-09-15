@@ -31,6 +31,33 @@ body {
     width: 400px;
     height: 270px;
 }
+.score-container, .max-container {
+    display: block !important;
+}
+.max-container {
+    background-image: url("../img/score.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 100% 100%;
+    width: 200px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    right: 100px;
+}
+
+
+.score-container {
+    background-image: url("../img/score.png");
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 100% 100%;
+    width: 200px;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    right: 300px;
+}
 
 .word-container {
     position: relative;
@@ -93,12 +120,34 @@ input[type="text"] {
     font-size: 18px;
     text-align: left;
 }
+#timer {
+    position: absolute;
+    top: 60px; 
+    left: 70px; 
+    font-size: 16px; 
+    z-index: 1; 
+}
+#score{
+    position: absolute;
+    top: 80px;
+    left: 70px; 
+    font-size: 16px;
+    z-index: 1; 
+}
+#max{
+    position: absolute;
+    top: 60px; 
+    left: 30px; 
+    font-size: 16px; 
+    z-index: 1; 
+}
+
 #startButton {
     background-color: rgba( 255, 255, 255, 0 );
     width : 300px;
     height: 150px;
     border: none;
-    margin-right: 50%;
+    margin-right: 40%;
 }
 #castle {
     position: absolute;
