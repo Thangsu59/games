@@ -247,12 +247,16 @@ function checkWord() {
         document.body.appendChild(arrow);
         anime({
             targets: 'div.arrow',
-            easing: 'linear',
+            easing: 'easeOutQuad',
             translateX: parseInt(getComputedStyle(document.querySelector('.dragon')).left)  //dragon div의 x좌표
                       + (parseInt(getComputedStyle(document.querySelector('.dragon')).width)/2), //width를 고려해 중앙좌표 연산
             translateY: - parseInt(getComputedStyle(document.querySelector('.dragon')).top)
                       + (parseInt(getComputedStyle(document.querySelector('.dragon')).height)/2),
-            duration: 200,
+            duration: 300,
+            rotate: {
+                value: 2000,
+                duration: 300
+            },
             changeBegin: function(anim){
                 arrowSound.play();
                 flyingSound.play();
