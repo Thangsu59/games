@@ -54,11 +54,6 @@
             document.querySelector('#maxScore').innerHTML = `<b>${point.piPoint}</b>`;
         });
 
-        window.addEventListener('load',async function(){
-            const res = await fetch('/point-infos/rank?giNum=1');
-            const point = await res.json();
-            document.querySelector('#Rank').innerHTML = `<b>${point.piPoint}</b>`;
-        });
     </script>
     </script>
     <script>
