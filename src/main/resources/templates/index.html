@@ -4,15 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+
+        @font-face{
+            font-family:'DNFBitBitv2';
+            src: url('../font/DNFBitBitTTF.ttf') format('truetype');
+        }
+
+        body {
+            font-family: 'DNFBitBitv2';
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: flex-start;
+            height: 100vh;
+            background-image: url("../img/background1.png");
+            background-repeat: no-repeat;
+            
+            background-size: 100% 100%;
+        }
+        .itd {
+            text-align: center;
+            font-size: 20px;
+        }
+        
+    </style>
 </head>
 <body>
-    안녕하세요 타임리프입니다.
+    
     <div th:if="${session.user} == null">
         <a href="/tmpl/user-info/login">로그인</a>
         <a href="/tmpl/user-info/join">회원가입</a>
     </div>
-    <div th:if="${session.user} != null">
-        <span th:text="${session.user.uiName}"></span>님 안녕하세요.<br>
+    <div class="itd" th:if="${session.user} != null">
+        <span style="color: red;" th:text="${session.user.uiName}"></span>님 안녕하세요.<br>
     </div>
     <div id="game-list"></div>
     최고점수 : <span id="maxScore"></span>
