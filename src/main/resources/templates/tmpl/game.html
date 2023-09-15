@@ -20,7 +20,7 @@
         </div>
         <input type="text" id="wordInput" placeholder="단어를 입력하세요" disabled>
         <div id="message"></div>
-        <button id="restartButton" style="display: none;"><img th:src="@{/img/restart.png}" width="50px" height="50px"></button>
+        
     </div>
     <div class="word-container" id="wordContainer">
         <button id="startButton"><img th:src="@{/img/start.png}"> <!-- 경로 수정 --></button>
@@ -32,9 +32,11 @@
     <audio id="failSound" th:src="@{/Esound/failSound.wav}"></audio>
     <audio id="destSound" th:src="@{/Esound/CAST_02.wav}"></audio>
     <audio id="clearSound" th:src="@{/Esound/clearSound.wav}"></audio>
+
     최고점수: <span id="maxScore"></span>
-    <button id="musicToggleButton">음악 ON/OFF</button>
+    <button id="musicToggleButton"><img th:src="@{/img/sound.png}" width="50px" height="50px"></button>
     <img id="castle" th:src="@{/img/castle.png}" alt="Castle"> <!-- 경로 수정 -->
+    <button id="restartButton" style="display: none;"><img th:src="@{/img/restart.png}" width="50px" height="50px"></button>
     <button>저장하기</button>
 
 

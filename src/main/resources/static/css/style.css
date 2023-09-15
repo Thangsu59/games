@@ -29,7 +29,7 @@ body {
     align-items: center;
     justify-content: center;
     width: 400px;
-    height: 220px;
+    height: 270px;
 }
 
 .word-container {
@@ -105,8 +105,19 @@ input[type="text"] {
     bottom: 0;
     left: 0;
     width: 350px;
+    
 }
 #restartButton{
+    border:none;
+    background-color: rgba( 0, 0, 0, 0.7 );
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    z-index: 9999;   
+}
+#musicToggleButton{
     border:none;
     background-color: rgba( 255, 255, 255, 0 );
     
