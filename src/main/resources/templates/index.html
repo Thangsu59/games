@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+        @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
 
-        @font-face{
-            font-family:'DNFBitBitv2';
+        @font-face {
+            font-family: 'DNFBitBitv2';
             src: url('../font/DNFBitBitTTF.ttf') format('truetype');
         }
 
@@ -15,64 +17,176 @@
             font-family: 'DNFBitBitv2';
             margin: 0;
             padding: 0;
-            display: flex;
             align-items: flex-start;
             height: 100vh;
-            background-image: url("../img/background1.png");
+            background-color: skyblue;
             background-repeat: no-repeat;
-            
             background-size: 100% 100%;
         }
+
         .itd {
             text-align: center;
-            font-size: 20px;
+            font-size: 40px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+            
         }
-        
+
+        #maxScoreContainer {
+            text-align: center;
+            font-size: 30px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100px;
+        }
+
+        #maxScoreText {
+            display: inline-block;
+        }
+
+        #maxScore {
+            display: inline-block;
+        }
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            height: 400px;
+            top: 20px;
+        }
+
+        h1 {
+            font-weight: normal;
+            letter-spacing: -1px;
+            color: #34495E;
+        }
+
+        .rwd-table {
+            background: orange;
+            color: black;
+            border:3px solid #000;
+            border-radius: .4em;
+            overflow: hidden;
+
+            tr {
+                border-color: lighten(black, 100%);
+            }
+
+            th,
+            td {
+                margin: .5em 1em;
+
+                @media (min-width: 768px) {
+
+                    .rwd-table th,
+                    .rwd-table td {
+                        padding: 1em !important;
+                    }
+                }
+            }
+
+            th,
+            td:before {
+                color: #dd5;
+            }
+        }
+
+        #game-list,
+        #score-container {
+            margin: 80px;
+        }
+
+        #game-title {
+            position: relative;
+            font-size: 30px;
+            text-align: center;
+            top: 80px;
+            right: 40px;
+        }
+
+        #game-list img {
+            position: relative;
+            top: 20px;
+            right: 50px;
+            width: 300px;
+            height: 300px;
+            margin-top: 10px;
+            margin-left: 20px;
+            border: 3px solid #000; 
+            border-radius: 20px; 
+        }
+
+
+        #Rank {
+            text-align: center;
+        }
     </style>
 </head>
+
 <body>
-    
+
     <div th:if="${session.user} == null">
         <a href="/tmpl/user-info/login">로그인</a>
         <a href="/tmpl/user-info/join">회원가입</a>
     </div>
     <div class="itd" th:if="${session.user} != null">
-        <span style="color: red;" th:text="${session.user.uiName}"></span>님 안녕하세요.<br>
+        <span th:id="username" th:text="${session.user.uiName}"></span>님 안녕하세요.<br>
     </div>
-    <div id="game-list"></div>
-    최고점수 : <span id="maxScore"></span>
-    <table border="1">
-        <tr>
-            <th>랭킹</th>
-            <th>이름</th>
-            <th>점수</th>
-        </tr>
-        <tbody id="Rank">
-        </tbody>
-    </table>
+    <div id="maxScoreContainer">
+        <span id="maxScoreText">최고점수 :</span>
+        <span id="maxScore"></span>
+    </div>
+    </div>
+    <div id="container">
+        <div id="t-container">
+        <h1 id="game-title">키보드 줄다리기</h1>
+        <div id="game-list">
+        </div>
+        </div>
+        <div id="score-container">
+            <h1>게임 랭킹</h1><br>
+            <table border="1" class="rwd-table">
+                <tr>
+                    <th>랭킹</th>
+                    <th>이름</th>
+                    <th>점수</th>
+                </tr>
+                <tbody id="Rank">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <script>
-        window.addEventListener('load',async function(){
+        window.addEventListener('load', async function () {
             const res = await fetch('/game-infos');
             const games = await res.json();
             let html = '';
-            for(const game of games) {
-                html += `<a href='/tmpl/game'>${game.giName}</a>`;
+            for (const game of games) {
+                html += `<a href='/tmpl/game'><img src="../img/Keybord tug of war.png" alt="${game.giName}" ></a>`;
             }
             document.querySelector('#game-list').innerHTML = html;
         });
 
-        window.addEventListener('load',async function(){
+        window.addEventListener('load', async function () {
             const res = await fetch('/point-infos/max?giNum=1');
             const point = await res.json();
             document.querySelector('#maxScore').innerHTML = `<b>${point.piPoint}</b>`;
         })
 
-        window.addEventListener('load',async function(){
+        window.addEventListener('load', async function () {
             const res = await fetch('/point-infos/rank?giNum=1');
             const ranks = await res.json();
             let html = '';
             let i = 1;
-            for(const rank of ranks) {
+            for (const rank of ranks) {
                 html += '<tr>';
                 html += `<td>${i++}</td>`;
                 html += `<td>${rank.uiName}</td>`;
@@ -82,5 +196,21 @@
             document.querySelector('#Rank').innerHTML = html;
         })
     </script>
+    <script>
+        // 랜덤 RGB 색상 생성 함수
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        // 랜덤 색상을 텍스트에 적용
+        const usernameElement = document.getElementById('username');
+        usernameElement.style.color = getRandomColor();
+    </script>
 </body>
+
 </html>
