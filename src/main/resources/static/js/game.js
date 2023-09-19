@@ -20,6 +20,7 @@ const triesDisplay = document.getElementById("tries");
 const wordCountDisplay = document.getElementById("wordCount");
 const restartButton = document.getElementById("restartButton");
 const timerDisplay = document.getElementById("timer");
+const castle = document.querySelector('#castle');
 
 const backgroundMusic = document.getElementById("backgroundMusic");
 const arrowSound = document.getElementById("arrowSound");
@@ -135,17 +136,15 @@ function animateWord() {
             dragon.style.left = position + "px";
 
             // 단어가 화면 왼쪽을 벗어났는지 확인
-            if (position + wordWidth < -10) {
+            if (position < (castle.style.left + castle.style.width)) {
                 cancelAnimationFrame(animationFrameId); // 애니메이션 중지
                 wordContainer.removeChild(dragon); // 단어 엘리먼트 제거
                 currentCategoryIndex++; // 다음 단어로 넘어감
                 destSound.play(); // 실패 효과음 재생
 
-                const castle = document.querySelector('#castle');
                 anime({
                     target: castle,
-                    translateX: 1000,
-                    duration: 1000
+                    translateX: 1000
                 })
 
                 triesLeft--; // 남은 시도 횟수 감소
@@ -250,8 +249,7 @@ function checkWord() {
         anime({
             targets: 'div.arrow',
             easing: 'easeInBack',
-            translateX: parseInt(getComputedStyle(document.querySelector('.dragon')).left)  //dragon div의 왼쪽좌표
-                      + (parseInt(getComputedStyle(document.querySelector('.dragon')).width)/2), //width를 고려해 중앙좌표 연산
+            translateX: parseInt(getComputedStyle(document.querySelector('.dragon')).left), //width를 고려해 중앙좌표 연산
             translateY: - parseInt(getComputedStyle(document.querySelector('.dragon')).top)
                       + (parseInt(getComputedStyle(document.querySelector('.dragon')).height)/2),
             duration: 400,
