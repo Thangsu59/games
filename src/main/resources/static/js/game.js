@@ -178,6 +178,8 @@ function animateWord() {
                     stopTimer();
                     restartButton.style.display = "block";
                     return;
+                    
+                    
                 }
 
                 // 시도 횟수가 3보다 작아지면 배경 이미지 변경
