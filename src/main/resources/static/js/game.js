@@ -269,8 +269,8 @@ function checkWord() {
         document.body.appendChild(arrow);
         anime({
             targets: 'div.arrow',
-            easing: 'easeInBack',
-            translateX: parseInt(getComputedStyle(document.querySelector('.dragon')).left), //width를 고려해 중앙좌표 연산
+            easing: 'easeInCirc',
+            translateX: parseInt(getComputedStyle(document.querySelector('.dragon')).left), //단어 div의 x좌표
             translateY: - parseInt(getComputedStyle(document.querySelector('.dragon')).top)
                       + (parseInt(getComputedStyle(document.querySelector('.dragon')).height)/2),
             duration: 400,
