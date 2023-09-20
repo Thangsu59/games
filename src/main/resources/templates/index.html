@@ -24,14 +24,14 @@
     </div>
     <div id="container">
         <div id="t-container">
-        <h1 id="game-title">키보드 줄다리기</h1>
-        <div id="game-list">
-        </div>
+            <h1 id="game-title">키보드 줄다리기</h1>
+            <div id="game-list">
+            </div>
         </div>
     </div>
     <div id="score-container">
         <h1>게임 랭킹</h1><br>
-        <table border="1" class="rwd-table" width ="250" height="450" bordercolor="blue">
+        <table border="1" class="rwd-table" width="250" height="450" bordercolor="blue">
             <tr>
                 <th>랭킹</th>
                 <th>이름</th>
@@ -63,16 +63,30 @@
             const res = await fetch('/point-infos/rank?giNum=1');
             const ranks = await res.json();
             let html = '';
-            let i = 1;
-            for (const rank of ranks) {
-                html += '<tr>';
-                html += `<td>${i++}</td>`;
+            for (let i = 0; i < ranks.length; i++) {
+                const rank = ranks[i];
+                let bgcolor = ''; 
+
+                // 1등, 2등, 3등에 따라 클래스 할당
+                if (i === 0) {
+                    bgcolor = 'gold'; // 1등 (금색)
+                } else if (i === 1) {
+                    bgcolor = 'silver'; // 2등 (은색)
+                } else if (i === 2) {
+                    bgcolor = 'bronze'; // 3등 (동색)
+                } else {
+                    bgcolor = 'orange';
+                }
+
+                html += `<tr bgcolor="${bgcolor}">`;
+                html += `<td>${i + 1}</td>`;
                 html += `<td>${rank.uiName}</td>`;
                 html += `<td>${rank.piPoint}</td>`;
-                html += '</tr>'
+                html += '</tr>';
             }
             document.querySelector('#Rank').innerHTML = html;
-        })
+        });
+
     </script>
     <script>
         // 랜덤 RGB 색상 생성 함수
