@@ -62,7 +62,7 @@
             position:absolute;
             text-align: center;
             top: 12%; 
-            right: 14%;
+            right: 10%;
             margin:150px;
             margin-top:20px;
             margin-bottom:180px;
@@ -72,6 +72,7 @@
             font-weight: normal;
             letter-spacing: -1px;
             color: #34495E;
+            margin:0px;
         }
 
         .rwd-table {
@@ -108,6 +109,10 @@
             margin: 80px;
         }
 
+        #toggleRankTable {
+            margin: 20px;
+        }
+
         #game-title {
             position: relative;
             font-size: 30px;
@@ -126,9 +131,38 @@
             margin-left: 20px;
             border: 3px solid #000; 
             border-radius: 20px; 
+            background-color: black;
         }
 
 
         #Rank {
             text-align: center;
+        }
+
+        #Keybord{
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            margin-right:-2px;
+        }
+        #blackjack{
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;    
+            margin-left:-2px;
+        }
+
+        #btn_group {
+            margin:20px;
+        }
+        #btn_group button{
+            font-family: 'DNFBitBitv2';
+            border: 1px solid black;
+            background-color: white;
+            color: black;
+            padding: 10px;
+            
+        }
+        #btn_group button:hover{
+            font-family: 'DNFBitBitv2';
+            color:white;
+            background-color: black;
         }

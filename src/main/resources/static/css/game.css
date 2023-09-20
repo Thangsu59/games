@@ -13,14 +13,14 @@ body {
     align-items: flex-start;
     justify-content: space-between;
     height: 100vh;
-    background-image: url("../img/background.png");
+    background-image: url("/img/background.png");
     background-repeat: no-repeat;
     background-position:100% 100%;
     background-size: 100% 100%;
 }
 
 .game-container {
-    background-image: url("../img/board.png");
+    background-image: url("/img/board.png");
     background-repeat: no-repeat;
     background-position:100% 100%;
     background-size: 100% 100%;
@@ -35,7 +35,7 @@ body {
     display: block !important;
 }
 .max-container {
-    background-image: url("../img/score.png");
+    background-image: url("/img/score.png");
     background-repeat: no-repeat;
     background-position: top right;
     background-size: 100% 100%;
@@ -48,7 +48,7 @@ body {
 
 
 .score-container {
-    background-image: url("../img/score.png");
+    background-image: url("/img/score.png");
     background-repeat: no-repeat;
     background-position: top right;
     background-size: 100% 100%;
@@ -82,7 +82,7 @@ body {
     height: 220px;
     position: absolute;
     left: 100%;
-    background-image: url("../img/dragon.gif"); 
+    background-image: url("/img/dragon.gif"); 
     background-size: 100% 70%;
     background-position:center bottom;
     background-repeat: no-repeat;
@@ -96,7 +96,7 @@ body {
     position:fixed;
     left:120px;
     bottom:150px;
-    background-image: url("../img/spike_ball.png");
+    background-image: url("/img/spike_ball.png");
     background-size: 100% 100%;
 }
 
@@ -160,7 +160,7 @@ input[type="text"] {
     left: 0;
     height: 500px;
     width: 350px;
-    background-image: url('../img/castle.png');
+    background-image: url('/img/castle.png');
     background-size: 100% 100%;
 }
 #restartButton{
@@ -187,5 +187,5 @@ input[type="text"] {
     width:100%;
 }
 #castle.game-over {
-    background-image: url('../img/castle1.png') ;
+    background-image: url('/img/castle1.png') ;
 }

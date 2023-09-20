@@ -15,7 +15,10 @@
     SELECT PI.*, GI.GI_NAME, UI.UI_NAME FROM POINT_INFO PI
     LEFT JOIN GAME_INFO GI ON PI.GI_NUM = GI.GI_NUM
     LEFT JOIN USER_INFO UI ON PI.UI_NUM = UI.UI_NUM
-    WHERE PI.GI_NUM=1
+    WHERE 
+    <if test="giNum == 1 or giNum == 2">
+    PI.GI_NUM = #{giNum}
+    </if>
     ORDER BY PI.PI_POINT DESC
     LIMIT 10
     </select>

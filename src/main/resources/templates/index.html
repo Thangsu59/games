@@ -31,7 +31,11 @@
     </div>
     <div id="score-container">
         <h1>게임 랭킹</h1><br>
-        <table border="1" class="rwd-table" width="250" height="450" bordercolor="blue">
+        <div id="btn_group">
+            <button id="Keybord" onclick="showTable(1)">줄다리기</button>
+            <button id="blackjack" onclick="showTable(2)">블랙잭</button>
+        </div>
+        <table border="1" class="rwd-table" width="250" height="450">
             <tr>
                 <th>랭킹</th>
                 <th>이름</th>
@@ -43,12 +47,52 @@
     </div>
 
     <script>
+        function generateRankTable(ranks) {
+            let html = '';
+            for (let i = 0; i < ranks.length; i++) {
+                const rank = ranks[i];
+                let bgcolor = '';
+
+                if (i === 0) {
+                    bgcolor = 'gold'; 
+                } else if (i === 1) {
+                    bgcolor = 'silver'; 
+                } else if (i === 2) {
+                    bgcolor = 'bronze'; 
+                } else {
+                    bgcolor = 'orange';
+                }
+
+                html += `<tr bgcolor="${bgcolor}">`;
+                html += `<td>${i + 1}</td>`;
+                html += `<td>${rank.uiName}</td>`;
+                html += `<td>${rank.piPoint}</td>`;
+                html += '</tr>';
+            }
+            document.querySelector('#Rank').innerHTML = html;
+        }
+
         window.addEventListener('load', async function () {
             const res = await fetch('/game-infos');
             const games = await res.json();
             let html = '';
+
             for (const game of games) {
-                html += `<a href='/tmpl/game'><img src="../img/Keybord tug of war.png" alt="${game.giName}" ></a>`;
+                let imgSrc = '';
+                let href = '';
+
+                if (game.giName === '키보드 줄다리기') {
+                    imgSrc = '/img/Keybord tug of war.png';
+                    href = 'game';
+                    
+                } else {
+                    imgSrc = '/img/joker1.png';
+                    href = 'game2';
+                    
+                }
+
+                html += `<a href='/tmpl/${href}'><img src="${imgSrc}" ></a>`;
+            
             }
             document.querySelector('#game-list').innerHTML = html;
         });
@@ -62,30 +106,29 @@
         window.addEventListener('load', async function () {
             const res = await fetch('/point-infos/rank?giNum=1');
             const ranks = await res.json();
-            let html = '';
-            for (let i = 0; i < ranks.length; i++) {
-                const rank = ranks[i];
-                let bgcolor = ''; 
-
-                // 1등, 2등, 3등에 따라 클래스 할당
-                if (i === 0) {
-                    bgcolor = 'gold'; // 1등 (금색)
-                } else if (i === 1) {
-                    bgcolor = 'silver'; // 2등 (은색)
-                } else if (i === 2) {
-                    bgcolor = 'bronze'; // 3등 (동색)
-                } else {
-                    bgcolor = 'orange';
-                }
-
-                html += `<tr bgcolor="${bgcolor}">`;
-                html += `<td>${i + 1}</td>`;
-                html += `<td>${rank.uiName}</td>`;
-                html += `<td>${rank.piPoint}</td>`;
-                html += '</tr>';
-            }
-            document.querySelector('#Rank').innerHTML = html;
+            generateRankTable(ranks);
         });
+
+
+        function showTable(giNum) {
+            if (giNum === 1) {
+                document.getElementById('Keybord').disabled = true;
+                document.getElementById('blackjack').disabled = false;
+                fetch('/point-infos/rank?giNum=1')
+                    .then(res => res.json())
+                    .then(ranks => {
+                        generateRankTable(ranks);
+                    });
+            } else if (giNum === 2) {
+                document.getElementById('blackjack').disabled = true;
+                document.getElementById('Keybord').disabled = false;
+                fetch('/point-infos/rank?giNum=2')
+                    .then(res => res.json())
+                    .then(ranks => {
+                        generateRankTable(ranks);
+                    });
+            }
+        }
 
     </script>
     <script>
