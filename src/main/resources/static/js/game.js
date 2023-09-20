@@ -4,7 +4,27 @@ const categories = {
     "보통": ["샥스핀", "역사학", "칡국수", "선생님", "감정적", "플랫폼", "먹잇감", "숨막힘", "용봉탕", "탕평책", "계산기", "함께하다", "수수께끼", "도깨비", "예술품", "폐기물", "콩깍지", "꼼장어", "꽁치찜", "단팥빵", "미숫가루", "격세지감", "미완예찬", "구렛나루", "뛰어남", "채찍질", "값싸다", "바람둥이", "웃음소리", "꼴뚜기", "팬케이크", "플라스틱", "바퀴벌레", "오매불망", "징검다리", "젊은이", "꿈틀거림", "반짝임", "마음가짐", "울음소리", "제비뽑기"],
     "어려움": ["고운점박이푸른부전나비", "모시금자라남생이잎벌레", "송곳벌레살이납작맵시벌", "어리등에살이뭉툭맵시벌", "폴립테루스세네갈", "라리앙안경원숭이", "데이빗경긴코바늘두더지", "짧은코가시두더지", "바실리스크도마뱀", "남극하트지느러미오징어", "슈돌리파리스앰블리스토몹시스", "프세우돌리파리스엠블리스토몹시스", "스트롱길로센트로투스드로에바치엔시스", "후무후무누쿠누쿠아푸아아", "잔점배무늬독수리", "클로니아비타타", "동헤르만육지거북", "아시안포레스트전갈", "데스스토커전갈", "메피스토펠레스루카스"]
 };
+window.addEventListener('load',async function(){
+    const res = await fetch('/random-words');
+    const json = await res.json();
+    const words = json.result;
+    console.log(categories['쉬움'].length);
+    console.log(categories);
+    for(const word of words){
+        if(word.name){
+            if(word.name.length<3){
+                categories['쉬움'].push(word.name);
+            }else if(word.name.length<4){
+                categories['보통'].push(word.name);
+            }else{
+                categories['어려움'].push(word.name);
+            }
+        }
+    }
+    console.log(categories['쉬움'].length);
+    console.log(categories);
 
+})
 let allWords = [];  // 모든 단어를 한 배열로 합침
 for (let category in categories) {
     allWords = allWords.concat(categories[category].map(word => ({ word: word, category: category })));
