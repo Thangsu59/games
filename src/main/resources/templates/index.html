@@ -5,129 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-        @import 'https://fonts.googleapis.com/css?family=Montserrat:300,400,700';
-
-        @font-face {
-            font-family: 'DNFBitBitv2';
-            src: url('../font/DNFBitBitTTF.ttf') format('truetype');
-        }
-
-        body {
-            font-family: 'DNFBitBitv2';
-            margin: 0;
-            padding: 0;
-            align-items: flex-start;
-            height: 100vh;
-            background-color: skyblue;
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-        }
-
-        .itd {
-            text-align: center;
-            font-size: 40px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100px;
-            
-        }
-
-        #maxScoreContainer {
-            text-align: center;
-            font-size: 30px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100px;
-        }
-
-        #maxScoreText {
-            display: inline-block;
-        }
-
-        #maxScore {
-            display: inline-block;
-        }
-
-        #container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: row;
-            height: 400px;
-            top: 20px;
-        }
-
-        h1 {
-            font-weight: normal;
-            letter-spacing: -1px;
-            color: #34495E;
-        }
-
-        .rwd-table {
-            background: orange;
-            color: black;
-            border:3px solid #000;
-            border-radius: .4em;
-            overflow: hidden;
-
-            tr {
-                border-color: lighten(black, 100%);
-            }
-
-            th,
-            td {
-                margin: .5em 1em;
-
-                @media (min-width: 768px) {
-
-                    .rwd-table th,
-                    .rwd-table td {
-                        padding: 1em !important;
-                    }
-                }
-            }
-
-            th,
-            td:before {
-                color: #dd5;
-            }
-        }
-
-        #game-list,
-        #score-container {
-            margin: 80px;
-        }
-
-        #game-title {
-            position: relative;
-            font-size: 30px;
-            text-align: center;
-            top: 80px;
-            right: 40px;
-        }
-
-        #game-list img {
-            position: relative;
-            top: 20px;
-            right: 50px;
-            width: 300px;
-            height: 300px;
-            margin-top: 10px;
-            margin-left: 20px;
-            border: 3px solid #000; 
-            border-radius: 20px; 
-        }
-
-
-        #Rank {
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/index.css}">
 </head>
 
 <body>
@@ -150,18 +28,18 @@
         <div id="game-list">
         </div>
         </div>
-        <div id="score-container">
-            <h1>게임 랭킹</h1><br>
-            <table border="1" class="rwd-table">
-                <tr>
-                    <th>랭킹</th>
-                    <th>이름</th>
-                    <th>점수</th>
-                </tr>
-                <tbody id="Rank">
-                </tbody>
-            </table>
-        </div>
+    </div>
+    <div id="score-container">
+        <h1>게임 랭킹</h1><br>
+        <table border="1" class="rwd-table" width ="250" height="450" bordercolor="blue">
+            <tr>
+                <th>랭킹</th>
+                <th>이름</th>
+                <th>점수</th>
+            </tr>
+            <tbody id="Rank">
+            </tbody>
+        </table>
     </div>
 
     <script>
