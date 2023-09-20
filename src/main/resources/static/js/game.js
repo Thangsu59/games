@@ -177,7 +177,7 @@ function animateWord() {
                     wordInput.disabled = true;
                     stopTimer();
                     restartButton.style.display = "block";
-                    return;
+                    castle.classList.add('game-over');
                     
                     
                 }
