@@ -37,7 +37,6 @@ const wordDisplay = document.getElementById("wordDisplay");
 const wordInput = document.getElementById("wordInput");
 const message = document.getElementById("message");
 const triesDisplay = document.getElementById("tries");
-const wordCountDisplay = document.getElementById("wordCount");
 const restartButton = document.getElementById("restartButton");
 const timerDisplay = document.getElementById("timer");
 const castle = document.querySelector('#castle');
@@ -169,7 +168,7 @@ function animateWord() {
 
                 triesLeft--; // 남은 시도 횟수 감소
                 triesDisplay.textContent = `남은 횟수: ${triesLeft}`; // 남은 시도 횟수 업데이트
-                wordCountDisplay.textContent = `남은 단어: ${allWords.length - currentCategoryIndex}`; // 남은 단어 차감
+                
 
                 if (triesLeft === 0) {
                     gameStarted = false;
@@ -264,7 +263,7 @@ function checkWord() {
         message.textContent = "맞음!"; // 정답 메시지 표시
         score += wordValue;
         updateScore(); // 점수 업데이트
-        wordCountDisplay.textContent = `남은 단어: ${allWords.length - currentCategoryIndex}`; // 남은 단어 개수 업데이트
+        
         const arrow = document.createElement('div');
         arrow.className = 'arrow';
         document.body.appendChild(arrow);
@@ -467,7 +466,6 @@ restartButton.addEventListener("click", function () {
     timerDisplay.textContent = "시간: 0";
     message.textContent = "";
     triesDisplay.textContent = `남은 횟수: ${triesLeft}`;
-    wordCountDisplay.textContent = `남은 단어: ${allWords.length}`;
     restartButton.style.display = "none";
     wordInput.disabled = false;
     wordInput.value = "";
@@ -485,5 +483,3 @@ restartButton.addEventListener("click", function () {
 });
 
 
-// 초기 게임 정보 표시
-wordCountDisplay.textContent = `남은 단어: ${allWords.length}`;

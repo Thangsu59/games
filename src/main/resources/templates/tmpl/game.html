@@ -14,7 +14,6 @@
                 <span th:text="${session.user.uiName}"></span><br>
             </div>
             <div id="tries">남은 횟수: 5</div>
-            <div id="wordCount">남은 단어: 0</div>
         </div>
         <input type="text" id="wordInput" placeholder="단어를 입력하세요" disabled>
         <div id="message"></div>
@@ -47,7 +46,7 @@
 
     
     <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
-    <script th:src="@{/js/game.js}"> </script> <!-- 경로 수정 -->
+    <script th:src="@{/js/game.js}"> </script>
     <script>
         window.addEventListener('load',async function(){
             const res = await fetch('/point-infos/max?giNum=1');
