@@ -307,6 +307,13 @@ function checkWord() {
         triesLeft--; // 남은 시도 횟수 감소
         triesDisplay.textContent = `남은 횟수: ${triesLeft}`; // 남은 시도 횟수 업데이트
         failSound.play(); // 실패 효과음 재생
+        anime({
+            easing: 'easeInOutBounce',
+            targets: document.body,
+            translateX: [10,-10,10,-10,10,0],
+            translateY: [-10,10,0,-10,10,0],
+            duration: 150,
+        })
 
         // 시도 횟수가 0인 경우
         if (triesLeft === 0) {
