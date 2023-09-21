@@ -162,8 +162,17 @@ function animateWord() {
                 destSound.play(); // 실패 효과음 재생
 
                 anime({
-                    target: castle,
-                    translateX: 1000
+                    easing: 'easeInOutBounce',
+                    targets: castle,
+                    translateX: [10,-10,10,-10,10,0],
+                    translateY: [-10,10,0,-10,10,0],
+                    duration: 150,
+                    changeBegin: function(){
+                        castle.style.filter="brightness(150%)";
+                    },
+                    changeComplete: function(){
+                        castle.style.filter="brightness(100%)";
+                    },
                 })
 
                 triesLeft--; // 남은 시도 횟수 감소
@@ -271,8 +280,8 @@ function checkWord() {
             targets: 'div.arrow',
             easing: 'easeInCirc',
             translateX: parseInt(getComputedStyle(document.querySelector('.dragon')).left), //단어 div의 x좌표
-            translateY: - parseInt(getComputedStyle(document.querySelector('.dragon')).top)
-                      + (parseInt(getComputedStyle(document.querySelector('.dragon')).height)/2),
+            translateY: - parseInt(getComputedStyle(document.querySelector('.dragon')).top)  //단어 div의 y좌표
+                      + (parseInt(getComputedStyle(document.querySelector('.dragon')).height)/2), //height의 절반(중앙)
             duration: 400,
             rotate: {
                 value: 2000,

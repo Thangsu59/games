@@ -150,13 +150,13 @@ input[type="text"] {
     width : 300px;
     height: 150px;
     top: 38%;
-    right: 38%;
+    right: 40%;
     border: none;
     margin: 0 auto;
 }
 #castle {
     position: absolute;
-    bottom: 0;
+    bottom: 10px;
     left: 0;
     height: 500px;
     width: 350px;
