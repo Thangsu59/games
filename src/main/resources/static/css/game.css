@@ -98,7 +98,7 @@ body::-webkit-scrollbar {
     position:fixed;
     left:120px;
     bottom:150px;
-    background-image: url("/img/spike_ball.png");
+    background-image: url("/img/fire_ball.png");
     background-size: 100% 100%;
 }
 
