@@ -23,4 +23,9 @@
     LIMIT 10
     </select>
 
+    <select id="selectGameMax" resultType="com.game.team2.vo.PointInfoVO">
+        SELECT MAX(PI_POINT) FROM POINT_INFO 
+        WHERE GI_NUM=#{giNum}
+    </select>
+
 </mapper>

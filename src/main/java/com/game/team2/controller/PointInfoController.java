@@ -42,4 +42,9 @@ public class PointInfoController {
     public List<PointInfoVO> getRankInfo(PointInfoVO point) {
         return pointInfoService.selectPointRank(point);
     }
+
+    @GetMapping("/point-infos/gameMax")
+    public PointInfoVO selectGameMax(PointInfoVO point) {
+       return pointInfoService.selectGameMax(point); 
+    }
 }

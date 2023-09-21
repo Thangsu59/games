@@ -130,9 +130,9 @@ function animateWord() {
 
         // 문자 길이에 따른 애니메이션 속도 설정
         const durationByCategory = {
-            "쉬움": 3,
-            "보통": 5,
-            "어려움": 7
+            "쉬움": 4,
+            "보통": 6,
+            "어려움": 8
         };
 
         const category = allWords[currentCategoryIndex].category;
