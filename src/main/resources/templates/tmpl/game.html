@@ -28,7 +28,7 @@
         <div id="score">현재 점수: 0</div>
     </div>
     <div class="max-container" id="maxContainer">
-        <div id="max"> 최고점수: <span id="maxScore"></span></div>
+        <div id="myMax">내 최고점수: <span id="myMaxScore"></span><br><br>게임 최고점수: <span id="maxScore"></span></div>
     </div>
     <audio id="backgroundMusic" th:src="@{/bgm/Game bgm.mp3}" preload="auto" loop hidden></audio>
     <audio id="arrowSound" th:src="@{/Esound/arrow.wav}"></audio>
@@ -51,7 +51,7 @@
         window.addEventListener('load',async function(){
             const res = await fetch('/point-infos/max?giNum=1');
             const point = await res.json();
-            document.querySelector('#maxScore').innerHTML = `<b>${point.piPoint}</b>`;
+            document.querySelector('#myMaxScore').innerHTML = `<b>${point.piPoint}</b>`;
         });
 
     </script>

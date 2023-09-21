@@ -36,20 +36,18 @@ body {
 }
 .max-container {
     background-image: url("/img/score.png");
-    background-repeat: no-repeat;
     background-position: top right;
     background-size: 100% 100%;
     width: 200px;
     height: 150px;
     position: absolute;
-    top: 0;
-    right: 100px;
+    top: 0%;
+    right: 7%;
 }
 
 
 .score-container {
     background-image: url("/img/score.png");
-    background-repeat: no-repeat;
     background-position: top right;
     background-size: 100% 100%;
     width: 200px;
@@ -135,10 +133,10 @@ input[type="text"] {
     font-size: 16px;
     z-index: 1; 
 }
-#max{
+#myMax{
     position: absolute;
-    top: 60px; 
-    left: 30px; 
+    top: 35%; 
+    left: 25%; 
     font-size: 16px; 
     z-index: 1; 
 }

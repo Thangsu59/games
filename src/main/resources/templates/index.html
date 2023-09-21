@@ -17,20 +17,17 @@
     <div class="itd" th:if="${session.user} != null">
         <span th:id="username" th:text="${session.user.uiName}"></span>님 안녕하세요.<br>
     </div>
-    <div id="maxScoreContainer">
-        <span id="maxScoreText">최고점수 :</span>
-        <span id="maxScore"></span>
-    </div>
+
     </div>
     <div id="container">
         <div id="t-container">
-            <h1 id="game-title">키보드 줄다리기</h1>
+            <h1 id="game-title">GAME</h1>
             <div id="game-list">
             </div>
         </div>
     </div>
     <div id="score-container">
-        <h1>게임 랭킹</h1><br>
+        <h1><img src="/img/tropy.gif">RANK</h1><br>
         <div id="btn_group">
             <button id="Keybord" onclick="showTable(1)">줄다리기</button>
             <button id="blackjack" onclick="showTable(2)">블랙잭</button>
@@ -47,7 +44,7 @@
     </div>
 
     <script>
-        function generateRankTable(ranks) {
+        function gsmRank(ranks) {
             let html = '';
             for (let i = 0; i < ranks.length; i++) {
                 const rank = ranks[i];
@@ -98,15 +95,9 @@
         });
 
         window.addEventListener('load', async function () {
-            const res = await fetch('/point-infos/max?giNum=1');
-            const point = await res.json();
-            document.querySelector('#maxScore').innerHTML = `<b>${point.piPoint}</b>`;
-        })
-
-        window.addEventListener('load', async function () {
             const res = await fetch('/point-infos/rank?giNum=1');
             const ranks = await res.json();
-            generateRankTable(ranks);
+            gsmRank(ranks);
         });
 
 
@@ -117,7 +108,7 @@
                 fetch('/point-infos/rank?giNum=1')
                     .then(res => res.json())
                     .then(ranks => {
-                        generateRankTable(ranks);
+                        gsmRank(ranks);
                     });
             } else if (giNum === 2) {
                 document.getElementById('blackjack').disabled = true;
@@ -125,7 +116,7 @@
                 fetch('/point-infos/rank?giNum=2')
                     .then(res => res.json())
                     .then(ranks => {
-                        generateRankTable(ranks);
+                        gsmRank(ranks);
                     });
             }
         }
