@@ -234,6 +234,8 @@ function endRound(result) {
     document.getElementById("your-sum").innerText = yourSum;
     document.getElementById("results").innerText = message;
     document.getElementById("next-round").style.display = "block";
+    document.getElementById("hit").style.display = "none";
+    document.getElementById("stand").style.display = "none";
     if (result === "승리") {
         userMoney += 2 * userBet;
     } else if (result === "무승부") {
