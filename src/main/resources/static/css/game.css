@@ -102,6 +102,11 @@ body::-webkit-scrollbar {
     background-size: 100% 100%;
 }
 
+.afterEffect{
+    position:absolute;
+    background-color: red;
+}
+
 input[type="text"] {
     font-family: 'DNFBitBitv2';
     font-size: 30px;

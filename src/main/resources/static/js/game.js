@@ -290,14 +290,16 @@ function checkWord() {
             changeBegin: function(anim){
                 arrowSound.play();
                 flyingSound.play();
+                wordInput.disabled = true;
                 effect = setInterval(function(){
                     const afterEffect = document.createElement('div');
                     afterEffect.className = "afterEffect";
-                    effectArray.push(afterEffect);
-                    afterEffect.style.position = 400, 400;
+                    document.body.appendChild(afterEffect);
+                    afterEffect.style.position = 200, 200;
                 },100)
             },
             changeComplete: function(anim){
+                wordInput.disabled = false;
                 clearInterval(effect);
                 document.body.removeChild(arrow);
                 hitSound.play();
