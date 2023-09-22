@@ -1,40 +1,78 @@
 body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
+    background-image: url("/img2/blackjack_background.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+#dealer-cards{
+    position: absolute;
+    width: 100%;
+    top:20%;
+}
+
+#your-cards{
+    position: absolute;
+    width: 100%;
+    top:55%;
 }
 
 #dealer-cards img {
-    height: 175px;
-    width: 125px;
+    height: 150px;
+    width: 100px;
     margin: 1px;
 }
 
 #your-cards img {
-    height: 175px;
-    width: 125px;
+    height: 150px;
+    width: 100px;
     margin: 1px;
 }
 
+#play-info{
+    width: 100%;
+    position: absolute;
+    top:40%;
+}
+
+#bet-info{
+    position: absolute;
+    width:350px;
+    top:50%;
+    left:10%;
+}
+
+#buttons {
+    position: absolute;
+    width:250px;
+    height: 200px;
+    top:30%;
+    left:10%;
+}
+
 #hit {
+    position: absolute;
     width: 100px;
     height: 50px;
     font-size: 20px;
-    background-color: rgb(255, 255, 255,0);
-    border: none;
+    align-self: self-start;
 }
 
 #stand {
     width: 100px;
     height: 50px;
     font-size: 20px;
-    background-color: rgb(255, 255, 255,0);
-    border: none;
-    
+    align-self: flex-end;
 }
 
 #next-round {
     width: 150px;
-    height: 90px;
+    height: 85px;
     font-size: 20px;
     display: block;
     background-color: rgb(255, 255, 255,0);
@@ -43,8 +81,6 @@ body {
 }
 
 #restart {
-    background-color: rgb(255, 255, 255,0);
-    border: none;
     width: 150px;
     height: 50px;
     font-size: 20px;

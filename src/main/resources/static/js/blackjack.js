@@ -52,7 +52,7 @@ function placeBet() {
     document.getElementById("user-money").innerText = userMoney;
 
     // 베팅 섹션을 숨김
-    document.getElementById("betting-section").style.display = "none";
+    document.getElementById("bet-info").style.display = "none";
 
     startGame();
 }
@@ -71,7 +71,7 @@ function startGame() {
 
     if (userBet > 0) {
         // 베팅 섹션을 숨김
-        document.getElementById("betting-section").style.display = "none";
+        document.getElementById("bet-info").style.display = "none";
         // Hit 및 Stand 버튼 표시
         document.getElementById("hit").style.display = "inline-block";
         document.getElementById("stand").style.display = "inline-block";
@@ -139,11 +139,12 @@ function nextRound() {
     yourAceCount = 0;
 
     document.getElementById("dealer-sum").innerText = "";
+    document.getElementById("your-sum").innerText = "";
     document.getElementById("results").innerText = "";
     document.getElementById("hidden").src = "/img/cards/BACK.png";
 
     // 베팅 섹션을 다시 표시
-    document.getElementById("betting-section").style.display = "block";
+    document.getElementById("bet-info").style.display = "block";
 
     if (round > 5) {
         document.getElementById("user-money").innerText = userMoney;
