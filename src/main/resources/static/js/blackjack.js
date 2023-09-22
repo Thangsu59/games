@@ -83,13 +83,13 @@ function startGame() {
 
     let hiddenCardImg = document.createElement("img");
     hiddenCardImg.id = "hidden"; 
-    hiddenCardImg.src = "/static/img/cards/BACK.png";
+    hiddenCardImg.src = "/img/cards/BACK.png";
     document.getElementById("dealer-cards").appendChild(hiddenCardImg);
 
     while (dealerSum < 17) {
         let cardImg = document.createElement("img");
         let card = deck.pop();
-        cardImg.src = "/static/img/cards/" + card + ".png";
+        cardImg.src = "/img/cards/" + card + ".png";
         dealerSum += getValue(card);
         dealerAceCount += checkAce(card);
         document.getElementById("dealer-cards").appendChild(cardImg);
@@ -99,7 +99,7 @@ function startGame() {
     for (let i = 0; i < 2; i++) {
         let cardImg = document.createElement("img");
         let card = deck.pop();
-        cardImg.src = "/static/img/cards/" + card + ".png";
+        cardImg.src = "/img/cards/" + card + ".png";
         yourSum += getValue(card);
         yourAceCount += checkAce(card);
         document.getElementById("your-cards").appendChild(cardImg);
@@ -128,7 +128,7 @@ function nextRound() {
 
     document.getElementById("dealer-sum").innerText = "";
     document.getElementById("results").innerText = "";
-    document.getElementById("hidden").src = "/static/img/cards/BACK.png";
+    document.getElementById("hidden").src = "/img/cards/BACK.png";
     document.getElementById("place-bet").disabled = false;
     
     if (round > 5) {
@@ -154,7 +154,7 @@ function hit() {
 
     let cardImg = document.createElement("img");
     let card = deck.pop();
-    cardImg.src = "/static/img/cards/" + card + ".png";
+    cardImg.src = "/img/cards/" + card + ".png";
     yourSum += getValue(card);
     yourAceCount += checkAce(card);
     document.getElementById("your-cards").append(cardImg);
@@ -169,7 +169,7 @@ function stand() {
     dealerSum = reduceAce(dealerSum, dealerAceCount);
     yourSum = reduceAce(yourSum, yourAceCount);
 
-    document.getElementById("hidden").src = "/static/img/cards/" + hidden + ".png";
+    document.getElementById("hidden").src = "/img/cards/" + hidden + ".png";
 
     let message = "";
     if (yourSum > 21) {
@@ -201,7 +201,7 @@ function endRound(result) {
     yourSum = reduceAce(yourSum, yourAceCount);
 
     // 딜러의 숨겨진 카드를 공개
-    document.getElementById("hidden").src = "/static/img/cards/" + hidden + ".png";
+    document.getElementById("hidden").src = "/img/cards/" + hidden + ".png";
 
     let message = "";
     if (yourSum > 21) {
@@ -277,7 +277,7 @@ function endGame() {
     document.getElementById("dealer-sum").innerText = "";
     document.getElementById("your-sum").innerText = "";
     document.getElementById("results").innerText = "";
-    document.getElementById("hidden").src = "/static/img/cards/BACK.png";
+    document.getElementById("hidden").src = "/img/cards/BACK.png";
     document.getElementById("your-cards").innerHTML = "";
     document.getElementById("dealer-cards").innerHTML = "";
     document.getElementById("next-round").style.display = "none";
@@ -342,7 +342,7 @@ function restartGame() {
     document.getElementById("dealer-sum").innerText = "";
     document.getElementById("your-sum").innerText = "";
     document.getElementById("results").innerText = "";
-    document.getElementById("hidden").src = "/static/img/cards/BACK.png";
+    document.getElementById("hidden").src = "/img/cards/BACK.png";
     document.getElementById("your-cards").innerHTML = "";
     document.getElementById("dealer-cards").innerHTML = "";
     document.getElementById("next-round").style.display = "none";

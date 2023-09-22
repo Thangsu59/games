@@ -55,6 +55,7 @@ let currentCategoryIndex = 0;
 let currentWordIndex = 0;
 let triesLeft = 5;
 let startTime = 0;
+let combo = 0;
 let timerInterval;
 let gameStarted = false;
 let animationFrameId;
@@ -160,6 +161,8 @@ function animateWord() {
                 wordContainer.removeChild(dragon); // 단어 엘리먼트 제거
                 currentCategoryIndex++; // 다음 단어로 넘어감
                 destSound.play(); // 실패 효과음 재생
+                message.textContent = "break!";
+                combo = 0;
 
                 anime({
                     easing: 'easeInOutBounce',
@@ -231,20 +234,6 @@ function displayWord() {
         // 모든 단어가 표시된 경우
         setGameEndTime(); // 게임 종료 시간 설정
 
-        // 게임 종료 시간에 따라 점수 계산
-        const elapsedTime = Math.floor((gameEndTime - startTime) / 1000);
-        let timeBasedScore = 0;
-        if (elapsedTime >= 0 && elapsedTime <= 100) {
-            timeBasedScore = 300;
-        } else if (elapsedTime > 100 && elapsedTime <= 200) {
-            timeBasedScore = 200;
-        } else {
-            timeBasedScore = 100;
-        }
-
-        // 최종 점수 계산
-        const finalScore = score + timeBasedScore;
-
         // 점수 표시
         message.textContent = `게임 종료! 최종 점수: ${finalScore}`;
         scoreDisplay.textContent = `현재 점수: ${finalScore}`;
@@ -264,12 +253,18 @@ function checkWord() {
     // 현재 단어 카테고리의 정답 단어와 카테고리 가져오기
     const { category, word } = allWords[currentCategoryIndex];
 
-    const wordValue = getCategoryValue(category);
+    let wordValue;
+    if(combo<20){
+        wordValue = getCategoryValue(category)+combo;
+    }else{
+        wordValue = getCategoryValue(category)+20;
+    }
 
 
     // 사용자 입력이 정답과 일치하는 경우
     if (userInput === allWords[currentCategoryIndex].word) {
-        message.textContent = "맞음!"; // 정답 메시지 표시
+        combo += 1;
+        message.textContent = combo + " Combo!"; // 정답 메시지 표시
         score += wordValue;
         updateScore(); // 점수 업데이트
         
@@ -291,12 +286,10 @@ function checkWord() {
                 arrowSound.play();
                 flyingSound.play();
                 wordInput.disabled = true;
-                effect = setInterval(function(){
-                    const afterEffect = document.createElement('div');
-                    afterEffect.className = "afterEffect";
-                    document.body.appendChild(afterEffect);
-                    afterEffect.style.position = 200, 200;
-                },100)
+                const afterEffect = document.createElement('div');
+                afterEffect.className = 'afterEffect';
+                document.body.appendChild(afterEffect);
+                afterEffect.style.left = parseInt(arrow.style.left) + "px";
             },
             changeComplete: function(anim){
                 wordInput.disabled = false;
@@ -311,7 +304,8 @@ function checkWord() {
             }
         })
     } else {
-        message.textContent = "틀림!"; // 오답 메시지 표시
+        message.textContent = "break!"; // 오답 메시지 표시
+        combo = 0;
         wordInput.value = ""; // 입력 필드 초기화
         triesLeft--; // 남은 시도 횟수 감소
         triesDisplay.textContent = `남은 횟수: ${triesLeft}`; // 남은 시도 횟수 업데이트
@@ -483,6 +477,7 @@ saveButton.addEventListener("click", function () {
 // 다시 시작 버튼 클릭 이벤트 처리
 restartButton.addEventListener("click", function () {
     // 게임 상태 초기화
+    combo = 0;
     currentCategoryIndex = 0;
     triesLeft = 5;
     startTime = 0;
