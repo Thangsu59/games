@@ -29,9 +29,11 @@ body {
 
 #next-round {
     width: 150px;
-    height: 50px;
+    height: 85px;
     font-size: 20px;
     display: block;
+    background-color: rgb(255, 255, 255,0);
+    border: none;
     margin: 10px auto; 
 }
 
