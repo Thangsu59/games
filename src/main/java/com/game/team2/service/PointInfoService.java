@@ -21,8 +21,8 @@ public class PointInfoService {
         return pointInfoMapper.selectMaxPoint(point);
     }
 
-    public PointInfoVO selectGameMax(PointInfoVO point) {
-        return pointInfoMapper.selectGameMax(point);
+    public PointInfoVO selectGameMax(int giNum) {
+        return pointInfoMapper.selectGameMax(giNum);
     }
 
     public List<PointInfoVO> selectPointRank(PointInfoVO point) {

@@ -44,7 +44,7 @@ public class PointInfoController {
     }
 
     @GetMapping("/point-infos/gameMax")
-    public PointInfoVO selectGameMax(PointInfoVO point) {
-       return pointInfoService.selectGameMax(point); 
+    public PointInfoVO selectGameMax(int giNum) {
+       return pointInfoService.selectGameMax(giNum); 
     }
 }
