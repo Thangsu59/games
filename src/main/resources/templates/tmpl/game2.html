@@ -21,9 +21,8 @@
     <div id="buttons">
         <button id="hit">Hit</button>
         <button id="stand">Stand</button>
-        <button id="next-round" style="display: none;"><img th:src="@{/img2/nextRound.png}" width="120px" height="120px"></button>
+        <button id="next-round" style="display: none;"></button>
         <button id="restart" style="display: none;">다시하기</button>
-        
     </div>
     <p id="results"></p>
 
@@ -31,7 +30,7 @@
         <h2>라운드 결과:</h2>
         <ul id="round-results"></ul>
     </div>
-    <h2>현재 금액: <span id="user-money">100</span></h2>
+    <h2 id="credit">현재 금액: <span id="user-money">100</span></h2><br>
     <div id="bet-info">
         <label for="bet">베팅 금액 : </label>
         <input type="number" id="bet" min="10" step="10">
