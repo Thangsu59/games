@@ -103,8 +103,13 @@ body::-webkit-scrollbar {
 }
 
 .afterEffect{
+    width:30px;
+    height:30px;
+    left:0;
+    bottom:0;
     position:absolute;
-    background-color: red;
+    background-image: url("/img/fire_ball.png");
+    background-size: 100% 100%;
 }
 
 input[type="text"] {
