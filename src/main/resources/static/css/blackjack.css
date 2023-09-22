@@ -95,10 +95,16 @@ body {
     left:0;
 }
 
+#roundNum{
+    position:absolute;
+    right:17%;
+    top:40%;
+}
+
 #round-history{
     position: absolute;
-    right:20%;
-    top:40%;
+    right:15%;
+    top:42%;
 }
 
 #restart {
