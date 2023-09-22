@@ -18,10 +18,10 @@
     <div id="your-cards"></div>
 
     <br>
-    <button id="hit"><img th:src="@{/img2/hit.png}" width="100px" height="50px"></button>
-    <button id="stand"><img th:src="@{/img2/stand.png}" width="100px" height="50px"></button>
+    <button id="hit" style="display: none">Hit</button>
+    <button id="stand" style="display: none">Stand</button>
     <button id="next-round" style="display: none;"><img th:src="@{/img2/nextRound.png}" width="120px" height="120px"></button>
-    <button id="restart" style="display: none;"><img th:src="@{/img2/restart.png}" width="50px" height="50px"></button>
+    <button id="restart" style="display: none;">다시하기</button>
     <p id="results"></p>
 
     <div id="round-history">
@@ -29,9 +29,12 @@
         <ul id="round-results"></ul>
     </div>
     <h2>현재 금액: <span id="user-money">100</span></h2>
-    <label for="bet">베팅 금액 : </label>
-    <input type="number" id="bet" min="10" step="10">
-    <button id="place-bet">베팅</button>
+    <div id="betting-section">
+        <label for="bet">베팅 금액 : </label>
+        <input type="number" id="bet" min="10" step="10">
+        <button id="place-bet">베팅</button>
+    </div>
+    
 
     <script th:src="@{/js/blackjack.js}"></script>
 </body>

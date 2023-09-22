@@ -51,10 +51,12 @@ function placeBet() {
     userMoney -= userBet;
     document.getElementById("user-money").innerText = userMoney;
 
-    document.getElementById("place-bet").disabled = true;
+    // 베팅 섹션을 숨김
+    document.getElementById("betting-section").style.display = "none";
 
     startGame();
 }
+
 
 function startGame() {
     if (round > 5) {
@@ -63,7 +65,16 @@ function startGame() {
         return;
     }
 
+    // Hit 및 Stand 버튼 숨김
+    document.getElementById("hit").style.display = "none";
+    document.getElementById("stand").style.display = "none";
+
     if (userBet > 0) {
+        // 베팅 섹션을 숨김
+        document.getElementById("betting-section").style.display = "none";
+        // Hit 및 Stand 버튼 표시
+        document.getElementById("hit").style.display = "inline-block";
+        document.getElementById("stand").style.display = "inline-block";
         return;
     }
 
@@ -113,8 +124,9 @@ function startGame() {
     document.getElementById("place-bet").disabled = false;
 
     
-    document.getElementById("next-round").style.display = "block";
+    document.getElementById("next-round").style.display = "none";
 }
+
 
 
 
@@ -129,20 +141,20 @@ function nextRound() {
     document.getElementById("dealer-sum").innerText = "";
     document.getElementById("results").innerText = "";
     document.getElementById("hidden").src = "/img/cards/BACK.png";
-    document.getElementById("place-bet").disabled = false;
-    
+
+    // 베팅 섹션을 다시 표시
+    document.getElementById("betting-section").style.display = "block";
+
     if (round > 5) {
-        
         document.getElementById("user-money").innerText = userMoney;
         document.getElementById("next-round").style.display = "none";
         document.getElementById("restart").style.display = "block";
     } else {
         document.getElementById("next-round").style.display = "block";
         document.getElementById("restart").style.display = "none";
-        startGame(); 
+        startGame();
     }
 }
-
 
 document.getElementById("next-round").addEventListener("click", nextRound);
 
@@ -220,7 +232,7 @@ function endRound(result) {
     document.getElementById("dealer-sum").innerText = dealerSum;
     document.getElementById("your-sum").innerText = yourSum;
     document.getElementById("results").innerText = message;
-
+    document.getElementById("next-round").style.display = "block";
     if (result === "승리") {
         userMoney += 2 * userBet;
     } else if (result === "무승부") {
