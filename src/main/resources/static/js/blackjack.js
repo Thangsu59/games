@@ -362,6 +362,7 @@ function restartGame() {
     document.getElementById("dealer-cards").innerHTML = "";
     document.getElementById("next-round").style.display = "none";
     document.getElementById("restart").style.display = "none";
+    document.getElementById("bet-info").style.display = "block";
     document.getElementById("hit").disabled = false;
     document.getElementById("stand").disabled = false;
 
