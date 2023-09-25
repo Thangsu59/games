@@ -63,10 +63,11 @@ body {
 }
 
 #hit {
+    background-color: rgb(255, 255, 255,0);
+    border: none;
     position: absolute;
     width: 100px;
     height: 50px;
-    font-size: 20px;
     left:0;
     bottom:0;
 }
@@ -75,9 +76,10 @@ body {
     position: absolute;
     width: 100px;
     height: 50px;
-    font-size: 20px;
     right:0;
     bottom:0;
+    background-color: rgb(255, 255, 255,0);
+    border: none;
 }
 
 #next-round {
@@ -108,9 +110,10 @@ body {
 }
 
 #restart {
-    width: 150px;
-    height: 50px;
-    font-size: 20px;
+    background-color: rgb(255, 255, 255,0);
+    border: none;
+    width: 100px;
+    height: 100px;
     display: none; 
     margin: 10px auto; 
     position: absolute;
