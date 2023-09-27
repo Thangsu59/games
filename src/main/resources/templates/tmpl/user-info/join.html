@@ -310,7 +310,10 @@
         }
 
 
-
+        input::placeholder {
+            color: red;
+            font-style: italic;
+        }
 
         .logo {
             position: absolute;
@@ -346,44 +349,20 @@
                                             <div class="form-group">
                                                 <form>
                                                     <label for="uiName">이름 :</label>
-                                                    <input type="text" id="uiName" required><br>
+                                                    <input type="text" id="uiName" placeholder = "30글자 이내로" required><br>
                                                     <label for="uiId">아이디 :</label>
-                                                    <input type="text" id="uiId" required><br>
+                                                    <input type="text" id="uiId" placeholder ="30글자 이내로" required><br>
                                                     <label for="uiPwd">비밀번호 :</label>
-                                                    <input type="password" id="uiPwd" required><br>
+                                                    <input type="password" id="uiPwd" placeholder ="300글자 이내로" required><br>
                                                     <label for="uiMobile">휴대전화 :</label>
-                                                    <input type="text" id="uiMobile"><br>
+                                                    <input type="text" id="uiMobile" placeholder ="11글자 이내로"><br>
                                                     <label for="uiEmail">이메일 :</label>
-                                                    <input type="text" id="uiEmail"><br>
+                                                    <input type="text" id="uiEmail" placeholder ="80글자 이내로"><br>
                                                     <label for="uiBirth">생일 :</label>
-                                                    <input type="date" id="uiBirth" required><br>
-                                                    <a style="cursor:pointer" onclick="join()" class="btn mt-4">로그인</a>
-                                                </form>
-                                            </div>
-                                    </div>
-                                </div>
-                                <div class="card-back">
-                                    <div class="center-wrap">
-                                        <div class="section text-center">
-                                            <h4 class="mb-4 pb-3">회원가입</h4>
-                                            <div class="form-group">
-                                                <form>
-                                                    <label for="uiName">이름 :</label>
-                                                    <input type="text" id="uiName" required><br>
-                                                    <label for="uiId">아이디 :</label>
-                                                    <input type="text" id="uiId" required><br>
-                                                    <label for="uiPwd">비밀번호 :</label>
-                                                    <input type="password" id="uiPwd" required><br>
-                                                    <label for="uiMobile">휴대전화 :</label>
-                                                    <input type="text" id="uiMobile"><br>
-                                                    <label for="uiEmail">이메일 :</label>
-                                                    <input type="text" id="uiEmail"><br>
-                                                    <label for="uiBirth">생일 :</label>
-                                                    <input type="date" id="uiBirth" required><br>
+                                                    <input type="date" id="uiBirth"><br>
                                                     <a style="cursor:pointer" onclick="join()" class="btn mt-4">회원가입</a>
                                                 </form>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
