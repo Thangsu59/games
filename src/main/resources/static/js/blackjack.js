@@ -361,6 +361,7 @@ function restartGame() {
     document.getElementById("your-cards").innerHTML = "";
     document.getElementById("dealer-cards").innerHTML = "";
     document.getElementById("next-round").style.display = "none";
+    document.getElementById("user-money").innerText = userMoney;
     document.getElementById("restart").style.display = "none";
     document.getElementById("bet-info").style.display = "block";
     document.getElementById("hit").disabled = false;
@@ -415,8 +416,8 @@ saveButton.addEventListener("click", function () {
     // 서버 엔드포인트 URL
     const serverUrl = "/point-infos"; // 서버에 점수를 저장하는 엔드포인트 경로
 
-    // 5라운드 종료 시의 점수를 yourSum으로 설정
-    const finalScore = yourSum;
+    // 5라운드 종료 시의 점수를 userMoney으로 설정
+    const finalScore = userMoney;
 
     // 서버에서 uiNum 가져오기
     fetch("/getUiNum")
