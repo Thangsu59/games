@@ -16,6 +16,14 @@ body {
     top:20%;
 }
 
+#dealer-info {
+    color : red;
+}
+
+#your-info {
+    color : blue;
+}
+
 #your-cards{
     position: absolute;
     width: 100%;
@@ -48,10 +56,16 @@ body {
     left:10%;
 }
 
+#betM {
+    color : white;
+    
+}
+
 #credit{
     position:absolute;
     left:20%;
     bottom:30%;
+    color:white;
 }
 
 #buttons {
@@ -101,12 +115,14 @@ body {
     position:absolute;
     right:17%;
     top:40%;
+    color:white;
 }
 
 #round-history{
     position: absolute;
     right:15%;
     top:42%;
+    color : white;
 }
 
 #restart {
