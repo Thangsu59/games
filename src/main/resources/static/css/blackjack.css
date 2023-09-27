@@ -56,6 +56,14 @@ body {
     left:10%;
 }
 
+#place-bet{
+    background-color: rgb(255, 255, 255,0);
+    border: none;
+    position: relative;
+    top: 20px; 
+    
+}
+
 #betM {
     color : white;
     
