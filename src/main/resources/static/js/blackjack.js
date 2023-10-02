@@ -8,6 +8,26 @@ let round = 1;
 let roundResults = [];
 let userMoney = 100;
 let userBet = 0;
+let dealerHiddenCardImage;
+
+// 덱, 사용자 돈, 사용자 베팅 관련 엘리먼트
+const betInput = document.getElementById("bet");
+const userMoneyDisplay = document.getElementById("user-money");
+const betInfo = document.getElementById("bet-info");
+const nextRoundButton = document.getElementById("next-round");
+const restartButton = document.getElementById("restart");
+const hitButton = document.getElementById("hit");
+const standButton = document.getElementById("stand");
+
+// 게임 결과 및 라운드 업데이트 엘리먼트
+const roundNumberDisplay = document.getElementById("round-number");
+const dealerSumDisplay = document.getElementById("dealer-sum");
+const yourSumDisplay = document.getElementById("your-sum");
+const resultsDisplay = document.getElementById("results");
+const hiddenCardImage = document.getElementById("hidden");
+const yourCardsDisplay = document.getElementById("your-cards");
+const dealerCardsDisplay = document.getElementById("dealer-cards");
+const roundResultsList = document.getElementById("round-results");
 
 window.onload = function () {
     buildDeck();
@@ -39,7 +59,6 @@ function shuffleDeck() {
 }
 
 function placeBet() {
-    const betInput = document.getElementById("bet");
     const betAmount = parseInt(betInput.value);
 
     if (betAmount <= 0 || betAmount % 10 !== 0 || betAmount > userMoney) {
@@ -49,14 +68,13 @@ function placeBet() {
 
     userBet = betAmount;
     userMoney -= userBet;
-    document.getElementById("user-money").innerText = userMoney;
+    userMoneyDisplay.innerText = userMoney;
 
     // 베팅 섹션을 숨김
-    document.getElementById("bet-info").style.display = "none";
+    betInfo.style.display = "none";
 
     startGame();
 }
-
 
 function startGame() {
     if (round > 5) {
@@ -96,6 +114,9 @@ function startGame() {
     hiddenCardImg.id = "hidden"; 
     hiddenCardImg.src = "/img/cards/BACK.png";
     document.getElementById("dealer-cards").appendChild(hiddenCardImg);
+    
+    // 추가: 딜러의 숨겨진 카드 이미지 엘리먼트 초기화
+    dealerHiddenCardImage = hiddenCardImg;
 
     while (dealerSum < 17) {
         let cardImg = document.createElement("img");
@@ -129,7 +150,6 @@ function startGame() {
 
 
 
-
 function nextRound() {
     returnToDeck();
 
@@ -138,27 +158,26 @@ function nextRound() {
     dealerAceCount = 0;
     yourAceCount = 0;
 
-    document.getElementById("dealer-sum").innerText = "";
-    document.getElementById("your-sum").innerText = "";
-    document.getElementById("results").innerText = "";
-    document.getElementById("hidden").src = "/img/cards/BACK.png";
+    dealerSumDisplay.innerText = "";
+    yourSumDisplay.innerText = "";
+    resultsDisplay.innerText = "";
+    hiddenCardImage.src = "/img/cards/BACK.png";
 
     // 베팅 섹션을 다시 표시
-    document.getElementById("bet-info").style.display = "block";
+    betInfo.style.display = "block";
 
     if (round > 5) {
-        document.getElementById("user-money").innerText = userMoney;
-        document.getElementById("next-round").style.display = "none";
-        document.getElementById("restart").style.display = "block";
+        userMoneyDisplay.innerText = userMoney;
+        nextRoundButton.style.display = "none";
+        restartButton.style.display = "block";
     } else {
-        document.getElementById("next-round").style.display = "block";
-        document.getElementById("restart").style.display = "none";
+        nextRoundButton.style.display = "block";
+        restartButton.style.display = "none";
         startGame();
     }
 }
 
 document.getElementById("next-round").addEventListener("click", nextRound);
-
 
 function hit() {
     if (deck.length === 0) {
@@ -170,10 +189,10 @@ function hit() {
     cardImg.src = "/img/cards/" + card + ".png";
     yourSum += getValue(card);
     yourAceCount += checkAce(card);
-    document.getElementById("your-cards").append(cardImg);
+    yourCardsDisplay.append(cardImg);
 
     if (reduceAce(yourSum, yourAceCount) > 21) {
-        document.getElementById("hit").removeEventListener("click", hit);
+        hitButton.removeEventListener("click", hit);
         endRound("패배");
     }
 }
@@ -182,7 +201,8 @@ function stand() {
     dealerSum = reduceAce(dealerSum, dealerAceCount);
     yourSum = reduceAce(yourSum, yourAceCount);
 
-    document.getElementById("hidden").src = "/img/cards/" + hidden + ".png";
+
+    dealerHiddenCardImage.src = "/img/cards/" + hidden + ".png";
 
     let message = "";
     if (yourSum > 21) {
@@ -197,13 +217,12 @@ function stand() {
         message = "패배";
     }
 
-    document.getElementById("dealer-sum").innerText = dealerSum;
-    document.getElementById("your-sum").innerText = yourSum;
-    document.getElementById("results").innerText = message;
+    dealerSumDisplay.innerText = dealerSum;
+    yourSumDisplay.innerText = yourSum;
+    resultsDisplay.innerText = message;
 
     endRound(message);
 }
-
 function endRound(result) {
     // 라운드 결과를 기록
     roundResults.push(`라운드 ${round}: ${result}`);
@@ -214,7 +233,7 @@ function endRound(result) {
     yourSum = reduceAce(yourSum, yourAceCount);
 
     // 딜러의 숨겨진 카드를 공개
-    document.getElementById("hidden").src = "/img/cards/" + hidden + ".png";
+    hiddenCardImage.src = "/img/cards/" + hidden + ".png";
 
     let message = "";
     if (yourSum > 21) {
@@ -230,12 +249,12 @@ function endRound(result) {
     }
 
     // 결과를 화면에 업데이트
-    document.getElementById("dealer-sum").innerText = dealerSum;
-    document.getElementById("your-sum").innerText = yourSum;
-    document.getElementById("results").innerText = message;
-    document.getElementById("next-round").style.display = "block";
-    document.getElementById("hit").style.display = "none";
-    document.getElementById("stand").style.display = "none";
+    dealerSumDisplay.innerText = dealerSum;
+    yourSumDisplay.innerText = yourSum;
+    resultsDisplay.innerText = message;
+    nextRoundButton.style.display = "block";
+    hitButton.style.display = "none";
+    standButton.style.display = "none";
     if (result === "승리") {
         userMoney += 2 * userBet;
     } else if (result === "무승부") {
@@ -246,8 +265,8 @@ function endRound(result) {
     userBet = 0;
 
     // 사용자의 금액을 업데이트하고 베팅 관련 요소 리셋
-    document.getElementById("user-money").innerText = userMoney;
-    document.getElementById("bet").value = "";
+    userMoneyDisplay.innerText = userMoney;
+    betInput.value = "";
     document.getElementById("place-bet").disabled = false;
 
     // 라운드 결과 업데이트
@@ -256,17 +275,16 @@ function endRound(result) {
     // 사용자의 돈이 0이면 게임 오버 처리
     if (userMoney <= 0 || round > 5) {
         // 5라운드가 종료되었을 때 또는 사용자 돈이 0일 때
-        document.getElementById("results").innerText = "GAME OVER";
-        document.getElementById("next-round").style.display = "none"; // 다음 라운드 버튼 숨기기
-        document.getElementById("restart").style.display = "block"; // 다시하기 버튼 표시
+        resultsDisplay.innerText = "GAME OVER";
+        nextRoundButton.style.display = "none"; // 다음 라운드 버튼 숨기기
+        restartButton.style.display = "block"; // 다시하기 버튼 표시
     }
 }
 
-
 function endGame() {
     // Hit 및 Stand 버튼 비활성화
-    document.getElementById("hit").disabled = true;
-    document.getElementById("stand").disabled = true;
+    hitButton.disabled = true;
+    standButton.disabled = true;
 
     // 게임 초기화
     round = 1;
@@ -279,39 +297,36 @@ function endGame() {
     // 사용자의 금액과 베팅 관련 요소 초기화
     userMoney = 100;
     userBet = 0;
-    document.getElementById("user-money").innerText = userMoney;
-    document.getElementById("bet").value = "";
+    userMoneyDisplay.innerText = userMoney;
+    betInput.value = "";
     document.getElementById("place-bet").disabled = false;
 
     // 라운드 결과 목록 초기화
-    const roundResultsList = document.getElementById("round-results");
     roundResultsList.innerHTML = "";
 
     // 게임 관련 요소 초기화
-    document.getElementById("round-number").innerText = round;
-    document.getElementById("dealer-sum").innerText = "";
-    document.getElementById("your-sum").innerText = "";
-    document.getElementById("results").innerText = "";
-    document.getElementById("hidden").src = "/img/cards/BACK.png";
-    document.getElementById("your-cards").innerHTML = "";
-    document.getElementById("dealer-cards").innerHTML = "";
-    document.getElementById("next-round").style.display = "none";
-    document.getElementById("restart").style.display = "none";
-    document.getElementById("hit").disabled = false;
-    document.getElementById("stand").disabled = false;
+    roundNumberDisplay.innerText = round;
+    dealerSumDisplay.innerText = "";
+    yourSumDisplay.innerText = "";
+    resultsDisplay.innerText = "";
+    hiddenCardImage.src = "/img/cards/BACK.png";
+    yourCardsDisplay.innerHTML = "";
+    dealerCardsDisplay.innerHTML = "";
+    nextRoundButton.style.display = "none";
+    restartButton.style.display = "none";
+    hitButton.disabled = false;
+    standButton.disabled = false;
 
-    // 덱 다시 섞고 게임 시작
     buildDeck();
     shuffleDeck();
     startGame();
 }
 
-
 function returnToDeck() {
-    deck.push(hidden); 
+    deck.push(hidden);
 
-    const yourCards = document.getElementById("your-cards").querySelectorAll("img");
-    const dealerCards = document.getElementById("dealer-cards").querySelectorAll("img");
+    const yourCards = yourCardsDisplay.querySelectorAll("img");
+    const dealerCards = dealerCardsDisplay.querySelectorAll("img");
 
     yourCards.forEach((cardImg) => {
         const cardFileName = cardImg.src.split("/").pop();
@@ -328,9 +343,7 @@ function returnToDeck() {
     shuffleDeck();
 }
 
-
 function updateRoundHistory() {
-    const roundResultsList = document.getElementById("round-results");
     roundResultsList.innerHTML = "";
     for (let i = 0; i < roundResults.length; i++) {
         const listItem = document.createElement("li");
@@ -338,8 +351,6 @@ function updateRoundHistory() {
         roundResultsList.appendChild(listItem);
     }
 }
-
-
 
 function restartGame() {
     round = 1;
@@ -349,30 +360,27 @@ function restartGame() {
     dealerAceCount = 0;
     yourAceCount = 0;
     userMoney = 100;
-    
-    const roundResultsList = document.getElementById("round-results");
+
     roundResultsList.innerHTML = "";
 
-    document.getElementById("round-number").innerText = round;
-    document.getElementById("dealer-sum").innerText = "";
-    document.getElementById("your-sum").innerText = "";
-    document.getElementById("results").innerText = "";
-    document.getElementById("hidden").src = "/img/cards/BACK.png";
-    document.getElementById("your-cards").innerHTML = "";
-    document.getElementById("dealer-cards").innerHTML = "";
-    document.getElementById("next-round").style.display = "none";
-    document.getElementById("user-money").innerText = userMoney;
-    document.getElementById("restart").style.display = "none";
-    document.getElementById("bet-info").style.display = "block";
-    document.getElementById("hit").disabled = false;
-    document.getElementById("stand").disabled = false;
+    roundNumberDisplay.innerText = round;
+    dealerSumDisplay.innerText = "";
+    yourSumDisplay.innerText = "";
+    resultsDisplay.innerText = "";
+    hiddenCardImage.src = "/img/cards/BACK.png";
+    yourCardsDisplay.innerHTML = "";
+    dealerCardsDisplay.innerHTML = "";
+    nextRoundButton.style.display = "none";
+    userMoneyDisplay.innerText = userMoney;
+    restartButton.style.display = "none";
+    betInfo.style.display = "block";
+    hitButton.disabled = false;
+    standButton.disabled = false;
 
     buildDeck();
     shuffleDeck();
     startGame();
 }
-
-
 
 function getValue(card) {
     let data = card.split("-");
@@ -409,9 +417,7 @@ if (round > 5) {
     document.getElementById("saveButton").style.display = "block";
 }
 
-
 // 저장 버튼 클릭 이벤트 핸들러
-const saveButton = document.getElementById("saveButton");
 saveButton.addEventListener("click", function () {
     // 서버 엔드포인트 URL
     const serverUrl = "/point-infos"; // 서버에 점수를 저장하는 엔드포인트 경로
