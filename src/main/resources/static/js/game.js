@@ -66,9 +66,9 @@ let gameEndTime = 0; // 게임 종료 시간을 기록할 변수
 // 음악 재생 여부를 나타내는 변수
 let isMusicPlaying = true;
 backgroundMusic.volume = 0.5;
-arrowSound.volume = 0.7;
-flyingSound.volume = 0.6;
-hitSound.volume = 0.2;
+arrowSound.volume = 1;
+flyingSound.volume = 1;
+hitSound.volume = 1;
 
 // 음악 토글 버튼 클릭 이벤트 처리
 musicToggleButton.addEventListener("click", function () {
@@ -271,8 +271,6 @@ function checkWord() {
         const arrow = document.createElement('div');
         arrow.className = 'arrow';
         document.body.appendChild(arrow);
-        const effectArray = document.createElement('div');
-        wordContainer.appendChild(effectArray);
         let effect;
         anime({
             targets: 'div.arrow',
@@ -286,14 +284,9 @@ function checkWord() {
                 arrowSound.play();
                 flyingSound.play();
                 wordInput.disabled = true;
-                const afterEffect = document.createElement('div');
-                afterEffect.className = 'afterEffect';
-                document.body.appendChild(afterEffect);
-                afterEffect.style.left = parseInt(arrow.style.left) + "px";
             },
             changeComplete: function(anim){
                 wordInput.disabled = false;
-                clearInterval(effect);
                 document.body.removeChild(arrow);
                 hitSound.play();
                 const currentWord = document.querySelector(".dragon");
