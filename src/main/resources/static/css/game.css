@@ -34,6 +34,16 @@ body::-webkit-scrollbar {
     width: 400px;
     height: 270px;
 }
+.game-container #message {
+    font-size: 18px;
+    margin-top: 5px;
+    text-align: left;
+}
+
+.game-container #info {
+    font-size: 18px;
+    text-align: left;
+}
 .score-container, .max-container {
     display: block !important;
 }
@@ -48,6 +58,13 @@ body::-webkit-scrollbar {
     right: 7%;
 }
 
+.max-container #myMax{
+    position: absolute;
+    top: 35%; 
+    left: 25%; 
+    font-size: 16px; 
+    z-index: 1; 
+}
 
 .score-container {
     background-image: url("/img/score.png");
@@ -59,7 +76,20 @@ body::-webkit-scrollbar {
     top: 0;
     right: 20%;
 }
-
+.score-container #timer {
+    position: absolute;
+    top: 60px; 
+    left: 70px; 
+    font-size: 16px; 
+    z-index: 1; 
+}
+.score-container #score{
+    position: absolute;
+    top: 80px;
+    left: 70px; 
+    font-size: 16px;
+    z-index: 1; 
+}
 .word-container {
     position: absolute;
     top:50%;
@@ -120,38 +150,6 @@ input[type="text"] {
     top: 10%; 
     left: 50%;
     transform: translateX(-50%);
-}
-
-#message {
-    font-size: 18px;
-    margin-top: 5px;
-    text-align: left;
-}
-
-#info {
-    font-size: 18px;
-    text-align: left;
-}
-#timer {
-    position: absolute;
-    top: 60px; 
-    left: 70px; 
-    font-size: 16px; 
-    z-index: 1; 
-}
-#score{
-    position: absolute;
-    top: 80px;
-    left: 70px; 
-    font-size: 16px;
-    z-index: 1; 
-}
-#myMax{
-    position: absolute;
-    top: 35%; 
-    left: 25%; 
-    font-size: 16px; 
-    z-index: 1; 
 }
 
 #startButton {
