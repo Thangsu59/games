@@ -98,7 +98,7 @@
             }
         }
 
-        #game-list {
+        #container #t-container #game-list {
             margin: 80px;
         }
 
@@ -106,7 +106,7 @@
             margin: 20px;
         }
 
-        #game-title {
+        #container #t-container #game-title {
             position: relative;
             font-size: 30px;
             text-align: center;
@@ -128,22 +128,22 @@
         }
 
 
-        #Rank {
+        .rwd-table #Rank {
             text-align: center;
         }
 
-        #Keybord{
+        #score-container #btn_group #Keybord{
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
             margin-right:-2px;
         }
-        #blackjack{
+        #score-container #btn_group #blackjack{
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;    
             margin-left:-2px;
         }
 
-        #btn_group {
+        #score-container #btn_group {
             margin:20px;
         }
         #btn_group button{
