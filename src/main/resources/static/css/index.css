@@ -68,7 +68,7 @@
             margin:0px;
         }
 
-        .rwd-table {
+        #score-container .rwd-table {
             background: orange;
             color: black;
             border:3px solid #000;
@@ -128,7 +128,7 @@
         }
 
 
-        .rwd-table #Rank {
+        #score-container .rwd-table #Rank {
             text-align: center;
         }
 
