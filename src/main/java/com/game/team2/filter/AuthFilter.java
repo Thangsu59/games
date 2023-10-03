@@ -13,20 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.filter.GenericFilterBean;
 
-import com.game.team2.util.JWTToken;
 import com.game.team2.vo.UserInfoVO;
 
-import lombok.extern.slf4j.Slf4j;
 
 @WebFilter(value = { "/*" })
-@Slf4j
 public class AuthFilter extends GenericFilterBean {
-    @Autowired
-    private JWTToken jwtToken;
 
     @Value("${auth.exclude.urls}")
     private List<String> excludeUrls = new ArrayList<>();
